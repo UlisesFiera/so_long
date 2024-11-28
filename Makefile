@@ -1,3 +1,5 @@
+gcc test.c -Lminilibx-linux -lmlx_Linux -lX11 -lXext
+
 %.o: %.c
 	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
