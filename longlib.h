@@ -20,7 +20,7 @@
 # include <string.h>
 # include <math.h>
 
-# include "minilibx/mlx.h"
+# include "minilibx-linux/mlx.h"
 # include "ft_printf/libft/libft.h"
 # include "ft_printf/libftprintf.h"
 
