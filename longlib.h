@@ -28,6 +28,10 @@ typedef struct	s_data
 {
 	void		*mlx;
 	void		*win;
+}				t_data;
+
+typedef struct	s_data 
+{
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
