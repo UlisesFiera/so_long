@@ -21,7 +21,7 @@ int		close_window(t_data *load)
 		exit (1);
 }
 
-
+ 
 int		esc_key(int keycode, t_data *load)
 {
 	if (keycode == 65307)

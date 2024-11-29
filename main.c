@@ -38,14 +38,20 @@ void	*initialize(t_data *load)
 int	main(void)
 {
 	t_data	load;
+	int		img_width;
+	int		img_height;
 
 	if (!initialize(&load))
 		return (0);
-	ft_pixel_put(&load, 300, 200, 0x00FF0000);
 	mlx_put_image_to_window(load.mlx, load.win, load.img, 0, 0);
+	load.img = mlx_xpm_file_to_image(load.mlx, "./image_test.xpm", &img_width, &img_height);
 	esc_window(&load);
 	mlx_loop(load.mlx);
 	mlx_destroy_display(load.mlx);
 	free(load.mlx);
 	return (0);
 }
+
+
+
+// ft_pixel_put(&load, 300, 200, 0x00FF0000);
