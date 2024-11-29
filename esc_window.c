@@ -12,14 +12,10 @@
 
 #include "longlib.h"
 
-int	esc_button(int keycode, t_data *load)
+int	close_window(int keycode, t_data *load)
 {
-	if (keycode == 17)
-	{
-		mlx_destroy_display(load->mlx);
-		free(load->mlx);
-		return (0);
-	}
+	mlx_destroy_window(load->mlx, load->win);
+	free(load->mlx);
 	return (0);
 }
 
@@ -27,7 +23,7 @@ int	esc_key(int keycode, t_data *load)
 {
 	if (keycode == 65307)
 	{
-		mlx_destroy_display(load->mlx);
+		mlx_destroy_window(load->mlx, load->win);
 		free(load->mlx);
 		return (0);
 	}
@@ -37,5 +33,5 @@ int	esc_key(int keycode, t_data *load)
 void	esc_window(t_data *load)
 {
 	mlx_key_hook(load->win, esc_key, load);
-	mlx_hook(load->win, 17, 0, esc_button, load);
+	mlx_hook(load->win, 17, 0, close_window, load);
 }

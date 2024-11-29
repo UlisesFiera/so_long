@@ -35,6 +35,7 @@ typedef struct	s_data
 	int			endian;
 }				t_data;
 
-
+void	ft_pixel_put(t_data *img, int x, int y, int color);
+void	esc_window(t_data *load);
 
 #endif

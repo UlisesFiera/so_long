@@ -1,4 +1,5 @@
 gcc test.c -Lminilibx-linux -lmlx_Linux -lX11 -lXext
+gcc main.c esc_window.c ft_pixel_put.c -o test  -Lminilibx-linux -lmlx_Linux -lX11 -lXext
 
 %.o: %.c
 	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@

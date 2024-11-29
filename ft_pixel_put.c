@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "longlib.h"
+
 void	ft_pixel_put(t_data *img, int x, int y, int color)
 {
 	char	*dst;
