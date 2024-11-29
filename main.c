@@ -45,7 +45,5 @@ int	main(void)
 	mlx_put_image_to_window(load.mlx, load.win, load.img, 0, 0);
 	esc_window(&load);
 	mlx_loop(load.mlx);
-	mlx_destroy_display(load.mlx);
-    free(load.mlx);
 	return (0);
 }
