@@ -20,7 +20,6 @@ void	*initialize(t_data *load)
 	load->win = mlx_new_window(load->mlx, 600, 400, "So long");
 	if (!load->win)
 	{
-		mlx_destroy_display(load->mlx);
 		free(load->mlx);
 		return (NULL);
 	}
@@ -28,7 +27,6 @@ void	*initialize(t_data *load)
 	if (!load->img)
 	{
 		mlx_destroy_window(load->mlx, load->win);
-		mlx_destroy_display(load->mlx);
 		free(load->mlx);
 		return (NULL);
 	}
@@ -44,8 +42,8 @@ int	main(void)
 	if (!initialize(&load))
 		return (0);
 	ft_pixel_put(&load, 300, 200, 0x00FF0000);
-	esc_window(&load);
 	mlx_put_image_to_window(load.mlx, load.win, load.img, 0, 0);
+	esc_window(&load);
 	mlx_loop(load.mlx);
 	return (0);
 }
