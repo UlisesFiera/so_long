@@ -12,7 +12,7 @@
 
 #include "longlib.h"
 
-void	mapping(t_data *img, t_data *load)
+void	mapping(t_data_img *img, t_data_load *load)
 {
 	img->img = mlx_xpm_file_to_image(img->mlx, "./image_test.xpm", 
 										img->img_width, img->img_height);
@@ -27,7 +27,7 @@ void	mapping(t_data *img, t_data *load)
 		mlx_put_image_to_window(load->mlx, load->win, img->img, 0, 0);
 }
 
-void	initialize(t_data *load)
+void	initialize(t_data_load *load)
 {
 	load->mlx = mlx_init();
 	if (!load->mlx)
@@ -43,8 +43,8 @@ void	initialize(t_data *load)
 
 int	main(void)
 {
-	t_data	load;
-	t_data	img;
+	t_data_load	load;
+	t_data_img	img;
 
 	if (!initialize(&load))
 		return (0);

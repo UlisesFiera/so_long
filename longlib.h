@@ -24,13 +24,13 @@
 # include "ft_printf/libft/libft.h"
 # include "ft_printf/libftprintf.h"
 
-typedef struct	s_data 
+typedef struct	s_data_load
 {
 	void		*mlx;
 	void		*win;
-}				t_data;
+}				t_data_load;
 
-typedef struct	s_data 
+typedef struct	s_data_img
 {
 	void		*img;
 	char		*addr;
@@ -39,9 +39,9 @@ typedef struct	s_data
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-}				t_data;
+}				t_data_img;
 
-void	ft_pixel_put(t_data *img, int x, int y, int color);
-void	esc_window(t_data *load);
+void	ft_pixel_put(t_data_img *img, int x, int y, int color);
+void	esc_window(t_data_load *load);
 
 #endif
