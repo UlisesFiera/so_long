@@ -43,7 +43,7 @@ int	main(void)
 		return (0);
 	ft_pixel_put(&load, 300, 200, 0x00FF0000);
 	mlx_put_image_to_window(load.mlx, load.win, load.img, 0, 0);
-	esc_window(&load);
 	mlx_loop(load.mlx);
+	esc_window(&load);
 	return (0);
 }
