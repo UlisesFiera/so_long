@@ -28,6 +28,7 @@ typedef struct	s_data_load
 {
 	void		*mlx;
 	void		*win;
+	char		*map;
 	void		*img;
 	char		*addr;
 	int			img_width;
