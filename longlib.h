@@ -28,10 +28,6 @@ typedef struct	s_data_load
 {
 	void		*mlx;
 	void		*win;
-}				t_data_load;
-
-typedef struct	s_data_img
-{
 	void		*img;
 	char		*addr;
 	int			img_width;
@@ -39,9 +35,9 @@ typedef struct	s_data_img
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-}				t_data_img;
+}				t_data_load;
 
-void	ft_pixel_put(t_data_img *img, int x, int y, int color);
+void	ft_pixel_put(t_data_load *load, int x, int y, int color);
 void	esc_window(t_data_load *load);
 
 #endif

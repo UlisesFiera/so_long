@@ -12,31 +12,31 @@
 
 #include "longlib.h"
 
-void	mapping(t_data_img *img, t_data_load *load)
+void	mapping(t_data_load *load)
 {
-	img->img = mlx_xpm_file_to_image(img->mlx, "./image_test.xpm", 
-										img->img_width, img->img_height);
-	if (!img->img)
+	load->img = mlx_xpm_file_to_image(load->mlx, "./image_test.xpm", 
+										&load->img_width, &load->img_height);
+	if (!load->img)
 	{
 		mlx_destroy_window(load->mlx, load->win);
 		free(load->mlx);
-		return ();
+		return ;
 	}
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length,
-									&img->endian);
-		mlx_put_image_to_window(load->mlx, load->win, img->img, 0, 0);
+	load->addr = mlx_get_data_addr(load->img, &load->bits_per_pixel, &load->line_length,
+									&load->endian);
+	mlx_put_image_to_window(load->mlx, load->win, load->img, 0, 0);
 }
 
-void	initialize(t_data_load *load)
+void	*initialize(t_data_load *load)
 {
 	load->mlx = mlx_init();
 	if (!load->mlx)
-		return ();
+		return ;
 	load->win = mlx_new_window(load->mlx, 600, 400, "So long");
 	if (!load->win)
 	{
 		free(load->mlx);
-		return ();
+		return ;
 	}
 	return (load->win);
 }
@@ -44,11 +44,10 @@ void	initialize(t_data_load *load)
 int	main(void)
 {
 	t_data_load	load;
-	t_data_img	img;
 
 	if (!initialize(&load))
 		return (0);
-	if (!mapping(&img, &load))
+	if (!mapping(&load))
 		return (0);
 	esc_window(&load);
 	mlx_loop(load.mlx);

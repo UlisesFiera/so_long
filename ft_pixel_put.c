@@ -12,10 +12,10 @@
 
 #include "longlib.h"
 
-void	ft_pixel_put(t_data_img *img, int x, int y, int color)
+void	ft_pixel_put(t_data_load *load, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = img->addr + (y *img->line_length + x * (img->bits_per_pixel / 8));
+	dst = load->addr + (y *load->line_length + x * (load->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
