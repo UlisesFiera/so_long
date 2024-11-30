@@ -14,7 +14,7 @@
 
 int		close_window(t_data_load *load)
 {
-		mlx_destroy_image(load->mlx, load->img);
+		//mlx_destroy_image(load->mlx, load->img);
 		mlx_destroy_window(load->mlx, load->win);
 		mlx_destroy_display(load->mlx);
 		free(load->mlx);
@@ -26,7 +26,7 @@ int		esc_key(int keycode, t_data_load *load)
 {
 	if (keycode == 65307)
 	{
-		mlx_destroy_image(load->mlx, load->img);
+		//mlx_destroy_image(load->mlx, load->img);
 		mlx_destroy_window(load->mlx, load->win);
 		mlx_destroy_display(load->mlx);
 		free(load->mlx);

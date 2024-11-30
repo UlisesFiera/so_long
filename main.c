@@ -16,13 +16,17 @@ void	*initialize(t_data_load *load)
 {
 	load->mlx = mlx_init();
 	if (!load->mlx)
+	{
+		perror ("mlx failure");
 		return (NULL);
+	}
 	load->win = mlx_new_window(load->mlx, load->img_height, load->img_width, "./so long");
 	if (!load->win)
 	{
-		free(load->mlx);
+		perror ("win failure");
 		return (NULL);
 	}
+	printf("MLX initialized and window created successfully.\n");
 	return (load->win);
 }
 
@@ -32,8 +36,6 @@ int		mapping(char *map, t_data_load *load)
 	char	*line;
 	int		pixel;
 
-	load->img_height = 0;
-	load->img_width = 0;
 	pixel = 16;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
@@ -41,12 +43,13 @@ int		mapping(char *map, t_data_load *load)
 		perror("Couldn't read file");
 		return (1);
 	}
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		load->img_height++;
-		if (load->img_width == 0)
-			load->img_width = ft_strlen(line);
+		load->img_width = ft_strlen(line);
 		free(line);
+		line = get_next_line(fd);
 	}
 	close (fd);
 	load->img_height *= pixel;
@@ -58,10 +61,11 @@ int		mapping(char *map, t_data_load *load)
 int		main(int argc, char **argv)
 {
 	t_data_load	load;
-	
+
+	ft_memset(&load, 0, sizeof(t_data_load));
 	if (argc > 2)
 	{
-		perror("1 .ber file only");
+		perror("one '.ber' file only");
 		return (1);
 	}
 	load.map = argv[1];
@@ -70,7 +74,7 @@ int		main(int argc, char **argv)
 		perror("Couldn't read map");
 		return (1);
 	}
-	if (!initialize(&load))
+	if (initialize(&load) == NULL)
 	{
 		perror("Couldn't initialize");
 		return (1);
