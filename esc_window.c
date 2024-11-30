@@ -18,7 +18,7 @@ int		close_window(t_data_load *load)
 		mlx_destroy_window(load->mlx, load->win);
 		mlx_destroy_display(load->mlx);
 		free(load->mlx);
-		exit (1);
+		exit (0);
 }
 
  
@@ -30,7 +30,7 @@ int		esc_key(int keycode, t_data_load *load)
 		mlx_destroy_window(load->mlx, load->win);
 		mlx_destroy_display(load->mlx);
 		free(load->mlx);
-		exit (1);
+		exit (0);
 	}
 	return (0);
 }

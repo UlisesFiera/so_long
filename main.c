@@ -32,6 +32,8 @@ int		mapping(char *map, t_data_load *load)
 	char	*line;
 	int		pixel;
 
+	load->img_height = 0;
+	load->img_width = 0;
 	pixel = 16;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
@@ -42,12 +44,13 @@ int		mapping(char *map, t_data_load *load)
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		load->img_height++;
-		load->img_width = ft_strlen(line);
+		if (load->img_width == 0)
+			load->img_width = ft_strlen(line);
 		free(line);
 	}
 	close (fd);
-	printf("h: %i\n", load->img_height *= pixel);
-	printf("h: %i\n", load->img_width *= pixel);
+	load->img_height *= pixel;
+	load->img_width *= pixel;
 	return (0);
 }
 
@@ -57,12 +60,21 @@ int		main(int argc, char **argv)
 	t_data_load	load;
 	
 	if (argc > 2)
-		return (0);
+	{
+		perror("1 .ber file only");
+		return (1);
+	}
 	load.map = argv[1];
-	if (!mapping(load.map, &load))
-		return (0);
+	if (mapping(load.map, &load))
+	{
+		perror("Couldn't read map");
+		return (1);
+	}
 	if (!initialize(&load))
-		return (0);
+	{
+		perror("Couldn't initialize");
+		return (1);
+	}
 	esc_window(&load);
 	mlx_loop(load.mlx);
 	mlx_destroy_display(load.mlx);
