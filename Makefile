@@ -1,45 +1,36 @@
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g3 -I/usr/include -Imlx_linux -O3
+NAME 					= so_long
 
-NAME = so_long.a
-LIBFT_DIR = ./libft
-LIBFT = $(LIBFT_DIR)/libft.a
-INC_DIRS = -I. -I$(LIBFT_DIR)
+LIBFT					= ./libft/libft.a
 
-SRCS = main.c ft_pixel_put.c esc_window.c textures.c
-OBJS = $(SRCS:.c=.o)
+CC						= gcc
 
-all: $(LIBFT) $(NAME)
+STD_FLAGS				= -Wall -Wextra -Werror
+MLX_FLAGS				= -Lminilibx-linux -lmlx_Linux -lX11 -lXext
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) -Lmlx_linux -lmlx_linux -L/usr/lib -Imlx_linux -lXext -1X11 -lm -lz -o $(NAME)
+SRCS					= main.c \
+						  esc_window.c \
+						  ft_pixel_put.c \
+						  textures.c \
 
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+OBJS					= ${SRCS:.c=.o}
 
-%.o: %.c
-	$(CC) $(CFLAGS) $(INC_DIRS) -c $< -o $@
+REMOVE					= rm -f ${OBJS}; rm -f so_long; rm -f *.out
+
+all:					${LIBFT} ${NAME}
+
+${NAME}:
+						${CC} ${SRCS} ${LIBFT} ${STD_FLAGS} ${MLX_FLAGS} -o ${NAME}
+
+${LIBFT}:				
+						make bonus -C ./libft
 
 clean:
-	rm -f $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR) clean
+						${REMOVE}
+						make clean -C ./libft
 
-fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
+fclean:					clean
+						make fclean -C ./libft
+						
+re:						fclean all
 
-re: fclean all
-
-.PHONY: all
-.PHONY: clean
-.PHONY: fclean
-.PHONY: re
-
-
-
-# INC_DIRS = -I. -I$(LIBFT_DIR)
-# Include directories (current and libft folder)
-
-# $(MAKE) -C $(LIBFT_DIR)
-# Creates libft; -C is used to navigate to the directory
-# pointed to by $(LIBFT_DIR)
+.PHONY:					all clean fclean re

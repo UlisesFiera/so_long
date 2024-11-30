@@ -12,13 +12,13 @@
 
 #include "libft.h"
 
-void	reset_list(t_list **str_list)
+void	reset_list(t_list_line **str_list)
 {
-	t_list		*last_node;
-	t_list		*clean_node;
-	char		*clean_str;
-	int			i;
-	int			j;
+	t_list_line		*last_node;
+	t_list_line		*clean_node;
+	char			*clean_str;
+	int				i;
+	int				j;
 
 	clean_str = malloc(BUFFER_SIZE);
 	clean_node = malloc(sizeof(t_list));
@@ -37,7 +37,7 @@ void	reset_list(t_list **str_list)
 	dealloc(str_list, clean_node, clean_str);
 }
 
-char	*get_line(t_list *str_list)
+char	*get_line(t_list_line *str_list)
 {
 	int		len;
 	char	*line;
@@ -52,10 +52,10 @@ char	*get_line(t_list *str_list)
 	return (line);
 }
 
-void	add_node(t_list **str_list, char *str_read)
+void	add_node(t_list_line **str_list, char *str_read)
 {
-	t_list		*last_node;
-	t_list		*new_node;
+	t_list_line		*last_node;
+	t_list_line		*new_node;
 
 	new_node = malloc(sizeof(t_list));
 	if (!new_node)
@@ -69,7 +69,7 @@ void	add_node(t_list **str_list, char *str_read)
 	new_node->next = NULL;
 }
 
-void	create_list(t_list **str_list, int fd)
+void	create_list(t_list_line **str_list, int fd)
 {
 	int		len;
 	char	*str_read;
@@ -92,8 +92,8 @@ void	create_list(t_list **str_list, int fd)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*str_list;
-	char			*next_line;
+	static t_list_line	*str_list;
+	char				*next_line;
 
 	next_line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)

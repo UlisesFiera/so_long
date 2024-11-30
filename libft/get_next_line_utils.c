@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-void	dealloc(t_list **list, t_list *clean_node, char *buf)
+void	dealloc(t_list_line **list, t_list_line *clean_node, char *buf)
 {
-	t_list		*temp;
+	t_list_line		*temp;
 
 	if (!list)
 		return ;
@@ -35,7 +35,7 @@ void	dealloc(t_list **list, t_list *clean_node, char *buf)
 	}
 }
 
-void	copy_content(t_list *list, char *new_string)
+void	copy_content(t_list_line *list, char *new_string)
 {
 	int		i;
 	int		j;
@@ -63,7 +63,7 @@ void	copy_content(t_list *list, char *new_string)
 	new_string[i] = '\0';
 }
 
-t_list	*lstlast(t_list *lst)
+t_list_line	*lstlast(t_list_line *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -72,7 +72,7 @@ t_list	*lstlast(t_list *lst)
 	return (lst);
 }
 
-int	found_nl(t_list *list)
+int	found_nl(t_list_line *list)
 {
 	int		i;
 
@@ -92,7 +92,7 @@ int	found_nl(t_list *list)
 	return (0);
 }
 
-int	len_sum(t_list *list)
+int	len_sum(t_list_line *list)
 {
 	int		len;
 	int		i;

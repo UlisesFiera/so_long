@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*img_load(t_data_load *load)
+#include "longlib.h"
+
+int		img_load(t_data_load *load)
 {
 	load->img = mlx_xpm_file_to_image(load->mlx, "./image_test.xpm", 
 										&load->img_width, &load->img_height);
@@ -18,9 +20,10 @@ void	*img_load(t_data_load *load)
 	{
 		mlx_destroy_window(load->mlx, load->win);
 		free(load->mlx);
-		return (NULL);
+		return (0);
 	}
 	load->addr = mlx_get_data_addr(load->img, &load->bits_per_pixel, &load->line_length,
 									&load->endian);
 	mlx_put_image_to_window(load->mlx, load->win, load->img, 0, 0);
+	return (0);
 }

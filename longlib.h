@@ -21,8 +21,7 @@
 # include <math.h>
 
 # include "minilibx-linux/mlx.h"
-# include "ft_printf/libft/libft.h"
-# include "ft_printf/libftprintf.h"
+# include "libft/libft.h"
 
 typedef struct	s_data_load
 {

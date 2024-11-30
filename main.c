@@ -26,7 +26,7 @@ void	*initialize(t_data_load *load)
 	return (load->win);
 }
 
-void	*mapping(char *map, t_data_load load)
+int		mapping(char *map, t_data_load *load)
 {
 	int		fd;
 	char	*line;
@@ -37,17 +37,18 @@ void	*mapping(char *map, t_data_load load)
 	if (fd < 0)
 	{
 		perror("Couldn't read file");
-		return (NULL);
+		return (1);
 	}
-	while ((!line = get_next_line(fd)))
+	while ((line = get_next_line(fd)) != NULL)
 	{
 		load->img_height++;
 		load->img_width = ft_strlen(line);
 		free(line);
 	}
 	close (fd);
-	load->img_height * pixel;
-	load->img_width * pixel;
+	printf("h: %i\n", load->img_height *= pixel);
+	printf("h: %i\n", load->img_width *= pixel);
+	return (0);
 }
 
 
@@ -55,6 +56,8 @@ int		main(int argc, char **argv)
 {
 	t_data_load	load;
 	
+	if (argc > 2)
+		return (0);
 	load.map = argv[1];
 	if (!mapping(load.map, &load))
 		return (0);

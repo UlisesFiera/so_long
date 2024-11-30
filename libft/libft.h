@@ -13,6 +13,10 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
@@ -20,9 +24,15 @@
 
 typedef struct s_list
 {
-	void			*content;
-	struct s_list	*next;
-}					t_list;
+	void				*content;
+	struct s_list		*next;
+}						t_list;
+
+typedef struct s_list_line
+{
+	char				*string;
+	struct s_list_line	*next;
+}						t_list_line;
 
 int				ft_atoi(const char *nptr);
 void			ft_bzero(void *s, size_t n);
@@ -75,16 +85,16 @@ int				ft_lstsize(t_list *lst);
 
 // get_next_line
 
-void			dealloc(t_list **list, t_list *clean_node, char *buf);
-void			copy_content(t_list *list, char *new_string);
-t_list			*lstlast(t_list *lst);
-int				found_nl(t_list *list);
-int				len_sum(t_list *list);
+void			dealloc(t_list_line **list, t_list_line *clean_node, char *buf);
+void			copy_content(t_list_line *list, char *new_string);
+t_list_line		*lstlast(t_list_line *lst);
+int				found_nl(t_list_line *list);
+int				len_sum(t_list_line *list);
 
-void			reset_list(t_list **str_list);
-char			*get_line(t_list *str_list);
-void			add_node(t_list **str_list, char *str_read);
-void			create_list(t_list **str_list, int fd);
+void			reset_list(t_list_line **str_list);
+char			*get_line(t_list_line *str_list);
+void			add_node(t_list_line **str_list, char *str_read);
+void			create_list(t_list_line **str_list, int fd);
 char			*get_next_line(int fd);
 
 // ft_printf
