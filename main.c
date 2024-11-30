@@ -12,7 +12,7 @@
 
 #include "longlib.h"
 
-void	mapping(t_data_load *load)
+void	*mapping(t_data_load *load)
 {
 	load->img = mlx_xpm_file_to_image(load->mlx, "./image_test.xpm", 
 										&load->img_width, &load->img_height);
@@ -20,7 +20,7 @@ void	mapping(t_data_load *load)
 	{
 		mlx_destroy_window(load->mlx, load->win);
 		free(load->mlx);
-		return ;
+		return (NULL);
 	}
 	load->addr = mlx_get_data_addr(load->img, &load->bits_per_pixel, &load->line_length,
 									&load->endian);
@@ -31,12 +31,12 @@ void	*initialize(t_data_load *load)
 {
 	load->mlx = mlx_init();
 	if (!load->mlx)
-		return ;
+		return (NULL);
 	load->win = mlx_new_window(load->mlx, 600, 400, "So long");
 	if (!load->win)
 	{
 		free(load->mlx);
-		return ;
+		return (NULL);
 	}
 	return (load->win);
 }
