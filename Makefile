@@ -1,29 +1,18 @@
-gcc test.c -Lminilibx-linux -lmlx_Linux -lX11 -lXext
-gcc main.c esc_window.c ft_pixel_put.c -o test  -Lminilibx-linux -lmlx_Linux -lX11 -lXext
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra -g3 -I/usr/include -Imlx_linux -O3
 
-%.o: %.c
-	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
-
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lmlx_linux -lmlx_linux -L/usr/lib -Imlx_linux -lXext -1X11 -lm -lz -o $(NAME)
-
-
-CC = cc
-CFLAGS = -Wall -Werror -Wextra -g3
-
-NAME = libftprintf.a
+NAME = so_long.a
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 INC_DIRS = -I. -I$(LIBFT_DIR)
 
-SRCS = ft_printf.c print_char.c print_digit.c print_ptr.c print_str.c print_un.c print_uphex.c
+SRCS = main.c ft_pixel_put.c esc_window.c textures.c
 OBJS = $(SRCS:.c=.o)
-AR = ar rcs
 
 all: $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJS)
+	$(CC) $(OBJS) -Lmlx_linux -lmlx_linux -L/usr/lib -Imlx_linux -lXext -1X11 -lm -lz -o $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)

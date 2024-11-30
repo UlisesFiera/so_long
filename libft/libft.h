@@ -15,6 +15,8 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
+
 
 typedef struct s_list
 {
@@ -70,5 +72,29 @@ t_list			*ft_lstlast(t_list *lst);
 t_list			*ft_lstmap(t_list *lst,
 					void *(*f)(void *), void (*del)(void *));
 int				ft_lstsize(t_list *lst);
+
+// get_next_line
+
+void			dealloc(t_list **list, t_list *clean_node, char *buf);
+void			copy_content(t_list *list, char *new_string);
+t_list			*lstlast(t_list *lst);
+int				found_nl(t_list *list);
+int				len_sum(t_list *list);
+
+void			reset_list(t_list **str_list);
+char			*get_line(t_list *str_list);
+void			add_node(t_list **str_list, char *str_read);
+void			create_list(t_list **str_list, int fd);
+char			*get_next_line(int fd);
+
+// ft_printf
+
+int	ft_printf(char const *format, ...);
+int	print_char(int arg);
+int	print_digit(long arg, int base);
+int	print_ptr(void *arg);
+int	print_str(char *arg);
+int	print_un(unsigned long arg, int base);
+int	print_uphex(long arg, int base);
 
 #endif

@@ -12,27 +12,12 @@
 
 #include "longlib.h"
 
-void	*mapping(t_data_load *load)
-{
-	load->img = mlx_xpm_file_to_image(load->mlx, "./image_test.xpm", 
-										&load->img_width, &load->img_height);
-	if (!load->img)
-	{
-		mlx_destroy_window(load->mlx, load->win);
-		free(load->mlx);
-		return (NULL);
-	}
-	load->addr = mlx_get_data_addr(load->img, &load->bits_per_pixel, &load->line_length,
-									&load->endian);
-	mlx_put_image_to_window(load->mlx, load->win, load->img, 0, 0);
-}
-
 void	*initialize(t_data_load *load)
 {
 	load->mlx = mlx_init();
 	if (!load->mlx)
 		return (NULL);
-	load->win = mlx_new_window(load->mlx, 600, 400, "So long");
+	load->win = mlx_new_window(load->mlx, load->img_height, load->img_width, "./so long");
 	if (!load->win)
 	{
 		free(load->mlx);
@@ -41,13 +26,39 @@ void	*initialize(t_data_load *load)
 	return (load->win);
 }
 
-int	main(void)
+void	*mapping(char *map, t_data_load load)
+{
+	int		fd;
+	char	*line;
+	int		pixel;
+
+	pixel = 16;
+	fd = open(map, O_RDONLY);
+	if (fd < 0)
+	{
+		perror("Couldn't read file");
+		return (NULL);
+	}
+	while ((!line = get_next_line(fd)))
+	{
+		load->img_height++;
+		load->img_width = ft_strlen(line);
+		free(line);
+	}
+	close (fd);
+	load->img_height * pixel;
+	load->img_width * pixel;
+}
+
+
+int		main(int argc, char **argv)
 {
 	t_data_load	load;
-
-	if (!initialize(&load))
+	
+	load.map = argv[1];
+	if (!mapping(load.map, &load))
 		return (0);
-	if (!mapping(&load))
+	if (!initialize(&load))
 		return (0);
 	esc_window(&load);
 	mlx_loop(load.mlx);

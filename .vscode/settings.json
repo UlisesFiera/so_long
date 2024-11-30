@@ -3,6 +3,7 @@
 	"files.associations": {
 		"longlib.h": "c",
 		"libft.h": "c",
-		"libftprintf.h": "c"
+		"libftprintf.h": "c",
+		"mlx.h": "c"
 	}
 }
