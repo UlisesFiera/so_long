@@ -26,7 +26,6 @@ void	*initialize(t_data_load *load)
 		perror ("win failure");
 		return (NULL);
 	}
-	printf("MLX initialized and window created successfully.\n");
 	return (load->win);
 }
 
@@ -79,6 +78,7 @@ int		main(int argc, char **argv)
 		perror("Couldn't initialize");
 		return (1);
 	}
+	load_textures(&load);
 	esc_window(&load);
 	mlx_loop(load.mlx);
 	mlx_destroy_display(load.mlx);

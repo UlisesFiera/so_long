@@ -10,7 +10,7 @@ MLX_FLAGS				= -Lminilibx-linux -lmlx_Linux -lX11 -lXext
 SRCS					= main.c \
 						  esc_window.c \
 						  ft_pixel_put.c \
-						  textures.c \
+						  load_textures.c \
 
 OBJS					= ${SRCS:.c=.o}
 

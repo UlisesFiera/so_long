@@ -39,5 +39,6 @@ typedef struct	s_data_load
 
 void	ft_pixel_put(t_data_load *load, int x, int y, int color);
 void	esc_window(t_data_load *load);
+int		load_textures(t_data_load *load);
 
 #endif
