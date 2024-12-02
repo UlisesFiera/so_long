@@ -30,14 +30,22 @@ typedef struct	s_data_load
 	char		*map;
 	void		*img;
 	char		*addr;
-	int			img_width;
-	int			img_height;
+	int			map_width;
+	int			map_height;
+}				t_data_load;
+
+typedef struct	s_data_texture
+{
+	void		*img;
+	char		*addr;
+	int			width;
+	int			height;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-}				t_data_load;
+}				t_data_texture;
 
-void	ft_pixel_put(t_data_load *load, int x, int y, int color);
+void	ft_pixel_put(t_data_texture *texture, int x, int y, int color);
 void	esc_window(t_data_load *load);
 int		load_textures(t_data_load *load);
 

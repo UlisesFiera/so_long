@@ -26,7 +26,6 @@ ${LIBFT}:
 
 clean:
 						${REMOVE}
-						make clean -C ./libft
 
 fclean:					clean
 						make fclean -C ./libft

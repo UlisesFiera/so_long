@@ -12,23 +12,35 @@
 
 #include "longlib.h"
 
-void	*floor(t_data_load *load)
+int		floor_load(t_data_load *load, t_data_texture *floor_texture)
 {
-	load->img = mlx_xpm_file_to_image(load->mlx, "./assets/floor.xpm", 
-										456, 645);
-	if (!load->img)
+	int		y;
+	int		x;
+	
+
+	y = 645;
+	x = 456;
+	floor_texture->img = mlx_xpm_file_to_image(load->mlx, "./assets/floor.xpm", 
+										&floor_texture->width, &floor_texture->height);
+	if (!floor_texture->img)
 	{
 		mlx_destroy_window(load->mlx, load->win);
 		free(load->mlx);
-		return (0);
+		return (1);
 	}
-	load->addr = mlx_get_data_addr(load->img, &load->bits_per_pixel, &load->line_length,
-									&load->endian);
-	mlx_put_image_to_window(load->mlx, load->win, load->img, 0, 0);
+	mlx_new_image(load->mlx, 96, 98);
+	floor_texture->addr = mlx_get_data_addr(floor_texture->img, &floor_texture->bits_per_pixel, 
+									&floor_texture->line_length, &floor_texture->endian);
+	
+	mlx_put_image_to_window(load->mlx, load->win, floor_texture->img, 0, 0);
 	return (0);
 }
 
 int		load_textures(t_data_load *load)
 {
-	floor(&load);
+	t_data_texture		floor_texture;
+
+	ft_memset(&floor_texture, 0, sizeof(t_data_texture));
+	floor_load(load, &floor_texture);
+	return (0);
 }

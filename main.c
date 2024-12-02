@@ -20,7 +20,7 @@ void	*initialize(t_data_load *load)
 		perror ("mlx failure");
 		return (NULL);
 	}
-	load->win = mlx_new_window(load->mlx, load->img_height, load->img_width, "./so long");
+	load->win = mlx_new_window(load->mlx, load->map_width, load->map_height, "./so long");
 	if (!load->win)
 	{
 		perror ("win failure");
@@ -35,7 +35,7 @@ int		mapping(char *map, t_data_load *load)
 	char	*line;
 	int		pixel;
 
-	pixel = 16;
+	pixel = 128;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 	{
@@ -45,14 +45,14 @@ int		mapping(char *map, t_data_load *load)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		load->img_height++;
-		load->img_width = ft_strlen(line);
+		load->map_height++;
+		load->map_width = ft_strlen(line);
 		free(line);
 		line = get_next_line(fd);
 	}
 	close (fd);
-	load->img_height *= pixel;
-	load->img_width *= pixel;
+	load->map_height *= pixel;
+	load->map_width *= pixel;
 	return (0);
 }
 
