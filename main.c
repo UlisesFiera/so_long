@@ -15,17 +15,18 @@
 void	*initialize(t_data_load *load)
 {
 	load->mlx = mlx_init();
-	load->pixel = 128;
+	load->pixel_x = 96;
+	load->pixel_y = 99;
 	if (!load->mlx)
 	{
 		perror ("mlx failure");
 		return (NULL);
 	}
-	load->win = mlx_new_window(load->mlx, (load->map_width * load->pixel), 
-								(load->map_height * load->pixel), "./so long");
+	load->win = mlx_new_window(load->mlx, (load->map_width * load->pixel_x), 
+								(load->map_height * load->pixel_y), "./so long");
 	if (!load->win)
 	{
-		perror ("win failure");
+		perror ("window failure");
 		return (NULL);
 	}
 	return (load->win);
