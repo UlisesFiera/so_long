@@ -31,7 +31,7 @@ typedef struct	s_data_load
 	void		*img;
 	char		*addr;
 	int			pixel_x;
-	int			pixe_y;
+	int			pixel_y;
 	int			map_width;
 	int			map_height;
 }				t_data_load;
