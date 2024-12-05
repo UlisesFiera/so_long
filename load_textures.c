@@ -14,13 +14,10 @@
 
 int		floor_load(t_data_load *load, t_data_texture *floor_texture)
 {
-	int		y;
-	int		x;
-	
+	int		i;
+	int		j;
 
-	y = 645;
-	x = 456;
-	floor_texture->img = mlx_xpm_file_to_image(load->mlx, "./assets/floor.xpm", 
+	floor_texture->img = mlx_xpm_file_to_image(load->mlx, "./assets/floor_sprite.xpm", 
 										&floor_texture->width, &floor_texture->height);
 	if (!floor_texture->img)
 	{
@@ -28,10 +25,17 @@ int		floor_load(t_data_load *load, t_data_texture *floor_texture)
 		free(load->mlx);
 		return (1);
 	}
-	mlx_new_image(load->mlx, 96, 98);
 	floor_texture->addr = mlx_get_data_addr(floor_texture->img, &floor_texture->bits_per_pixel, 
 									&floor_texture->line_length, &floor_texture->endian);
-	
+	i = 0;
+	while (i < load->map_height)
+	{
+		j = 0;
+		while (j < load->map_width)
+		{
+			
+		}
+	}
 	mlx_put_image_to_window(load->mlx, load->win, floor_texture->img, 0, 0);
 	return (0);
 }
