@@ -31,8 +31,11 @@ int		floor_load(t_data_load *load, t_data_texture *floor_texture)
 int		load_textures(t_data_load *load)
 {
 	t_data_texture		floor_texture;
+	t_data_texture		wall_texture;
 
 	ft_memset(&floor_texture, 0, sizeof(t_data_texture));
 	floor_load(load, &floor_texture);
+	ft_memset(&wall_texture, 0, sizeof(t_data_texture));
+	wall_load(load, &wall_texture);
 	return (0);
 }
