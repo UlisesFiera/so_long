@@ -12,14 +12,6 @@
 
 #include "longlib.h"
 
-void	texture_put(t_data_load *load, t_data_texture *texture, int option)
-{
-	if (option == 0)
-		floor_put(&load, &texture);
-	if (option == 1)
-		sprite_put(&load, &texture, option);
-}
-
 void	floor_put(t_data_load *load, t_data_texture *floor_texture)
 {
 	int		i;
@@ -44,29 +36,40 @@ void	floor_put(t_data_load *load, t_data_texture *floor_texture)
 	}
 }
 
-void	sprite_put(t_data_load *load, t_data_texture *sprite_texture, int option)
+void	sprite_put(t_data_load *load, t_data_texture *sprite_texture, char option)
 {
 	int		fd;
 	char	*line;
 	int		i;
 	int		j;
 
-	option = 1;
 	fd = open(load->map, O_RDONLY);
-	line = get_next_line;
+	line = get_next_line(fd);
 	i = 0;
 	while (line != NULL)
 	{
 		j = 0;
-		while (line[j++])
+		while (line[j])
 		{
-			if (line[j] == option)
-			mlx_put_image_to_window(load->mlx, load->win, sprite_texture->img, 
-									(sprite_texture->width * j), (sprite_texture->width * i));
+			if ((char) line[j] == option)
+			{
+				mlx_put_image_to_window(load->mlx, load->win, sprite_texture->img, 
+										(sprite_texture->width * j), (sprite_texture->width * i));
+			}
+			j++;
 		}
 		i++;
 		free(line);
-		line = get_next_line;
+		line = get_next_line(fd);
 	}
 	close(fd);
 }
+
+void	texture_put(t_data_load *load, t_data_texture *texture, char option)
+{
+	if (option == '0')
+		floor_put(load, texture);
+	if (option == '1')
+		sprite_put(load, texture, option);
+}
+
