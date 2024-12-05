@@ -49,6 +49,6 @@ typedef struct	s_data_texture
 
 void	esc_window(t_data_load *load);
 int		load_textures(t_data_load *load);
-void	texture_put(t_data_load *load, t_data_texture *texture);
+void	texture_put(t_data_load *load, t_data_texture *texture, int option);
 
 #endif
