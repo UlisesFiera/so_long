@@ -11,6 +11,7 @@ SRCS					= main.c \
 						  esc_window.c \
 						  ft_pixel_put.c \
 						  load_textures.c \
+						  texture_put.c
 
 OBJS					= ${SRCS:.c=.o}
 

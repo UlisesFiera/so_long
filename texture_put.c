@@ -12,7 +12,7 @@
 
 #include "longlib.h"
 
-void	texture_put(t_data_load load, t_data_texture texture)
+void	texture_put(t_data_load *load, t_data_texture *floor_texture)
 {
 	int		i;
 	int		j;
@@ -22,16 +22,16 @@ void	texture_put(t_data_load load, t_data_texture texture)
 	i = 0;
 	y = 0;
 	while (i < load->map_height)
+	{
+		x = 0;
+		j = 0;
+		while (j < load->map_width)
 		{
-			x = 0;
-			j = 0;
-			while (j < load->map_width)
-			{
-				mlx_put_image_to_window(load->mlx, load->win, floor_texture->img, x, y);
-				x += floor_texture->width;
-				j++;
-			}
-			y += floor_texture->height;
-			i++;
+			mlx_put_image_to_window(load->mlx, load->win, floor_texture->img, x, y);
+			x += floor_texture->width;
+			j++;
 		}
+		y += floor_texture->height;
+		i++;
+	}
 }

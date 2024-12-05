@@ -24,7 +24,7 @@ int		floor_load(t_data_load *load, t_data_texture *floor_texture)
 	}
 	floor_texture->addr = mlx_get_data_addr(floor_texture->img, &floor_texture->bits_per_pixel, 
 									&floor_texture->line_length, &floor_texture->endian);
-	texture_put(load, texture);
+	texture_put(load, floor_texture);
 	return (0);
 }
 
