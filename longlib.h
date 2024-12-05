@@ -47,8 +47,8 @@ typedef struct	s_data_texture
 	int			endian;
 }				t_data_texture;
 
-void	ft_pixel_put(t_data_texture *texture, int x, int y, int color);
 void	esc_window(t_data_load *load);
 int		load_textures(t_data_load *load);
+void	texture_put(t_data_load load, t_data_texture texture)
 
 #endif
