@@ -4,7 +4,7 @@ LIBFT					= ./libft/libft.a
 
 CC						= gcc
 
-STD_FLAGS				= -Wall -Wextra -Werror
+STD_FLAGS				= -Wall -Wextra -Werror -fPIE
 MLX_FLAGS				= -Lminilibx-linux -lmlx_Linux -lX11 -lXext
 
 SRCS					= main.c \

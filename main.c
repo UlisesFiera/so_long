@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:34:24 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/11/28 11:34:24 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:01:19 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,13 @@ int		mapping(char *map, t_data_load *load)
 		line = get_next_line(fd);
 	}
 	close (fd);
+	if (map_check(load))
+	{
+		perror("Error: invalid map");
+		return (1);
+	}
 	return (0);
 }
-
 
 int		main(int argc, char **argv)
 {
@@ -88,3 +92,4 @@ int		main(int argc, char **argv)
 
 
 // ft_pixel_put(&load, 300, 200, 0x00FF0000);
+// ft_printf("Hi!\n");
