@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:34:24 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/06 16:01:19 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/07 11:25:54 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	*initialize(t_data_load *load)
 	load->pixel_y = 99;
 	if (!load->mlx)
 	{
-		perror ("mlx failure");
+		ft_printf("Error: mlx failure\n");
 		return (NULL);
 	}
 	load->win = mlx_new_window(load->mlx, (load->map_width * load->pixel_x), 
 								(load->map_height * load->pixel_y), "./so long");
 	if (!load->win)
 	{
-		perror ("window failure");
+		ft_printf("Error: couldn't create window\n");
 		return (NULL);
 	}
 	return (load->win);
@@ -40,7 +40,7 @@ int		mapping(char *map, t_data_load *load)
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 	{
-		perror("Couldn't read file");
+		ft_printf("Error: couldn't read map file\n");
 		return (1);
 	}
 	line = get_next_line(fd);
@@ -54,7 +54,7 @@ int		mapping(char *map, t_data_load *load)
 	close (fd);
 	if (map_check(load))
 	{
-		perror("Error: invalid map");
+		ft_printf("Error: invalid map\n");
 		return (1);
 	}
 	return (0);
@@ -67,18 +67,15 @@ int		main(int argc, char **argv)
 	ft_memset(&load, 0, sizeof(t_data_load));
 	if (argc > 2)
 	{
-		perror("one '.ber' file only");
+		ft_printf("Error: one '.ber' file only\n");
 		return (1);
 	}
 	load.map = argv[1];
 	if (mapping(load.map, &load))
-	{
-		perror("Couldn't read map");
 		return (1);
-	}
 	if (initialize(&load) == NULL)
 	{
-		perror("Couldn't initialize");
+		ft_printf("Error: couldn't initialize game\n");
 		return (1);
 	}
 	load_textures(&load);

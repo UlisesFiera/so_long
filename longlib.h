@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:47:32 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/11/28 11:47:32 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:41:30 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,8 @@ typedef struct	s_data_texture
 void	esc_window(t_data_load *load);
 int		load_textures(t_data_load *load);
 void	texture_put(t_data_load *load, t_data_texture *texture, char option);
+int		map_check(t_data_load *load);
+int		route(t_data_load *load);
+int		backtracking(char **matrix);
 
 #endif

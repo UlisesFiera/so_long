@@ -9,9 +9,11 @@ MLX_FLAGS				= -Lminilibx-linux -lmlx_Linux -lX11 -lXext
 
 SRCS					= main.c \
 						  esc_window.c \
-						  ft_pixel_put.c \
+						  map_check.c \
 						  load_textures.c \
-						  texture_put.c
+						  texture_put.c \
+						  route.c \
+						  backtracking.c
 
 OBJS					= ${SRCS:.c=.o}
 
