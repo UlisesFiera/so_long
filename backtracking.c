@@ -14,23 +14,17 @@
 
 int path_find(char **matrix, int y, int x) 
 {
-	char	original;
-
 	if (matrix[y][x] == 'E')
 		return (0);
 	if (matrix[y][x] != '0' || matrix[y][x] != 'C')
 		return (1);
-	original = matrix[y][x];
 	matrix[y][x] = 'V';
-	if (path_find(matrix, y - 1, x) == 0)
+	if (path_find(matrix, y - 1, x) == 0 ||
+		path_find(matrix, y, x - 1) == 0 ||
+		path_find(matrix, y, x + 1) == 0 ||
+		path_find(matrix, y + 1, x) == 0)
 		return 0;
-    if (path_find(matrix, y, x - 1) == 0)
-		return 0;
-    if (path_find(matrix, y, x + 1) == 0)
-		return 0;
-    if (path_find(matrix, y + 1, x) == 0)
-		return 0;
-	matrix[y][x] = original;
+	matrix[y][x] = '0';
     return (1);
 }
 
