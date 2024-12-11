@@ -16,22 +16,21 @@ int path_find(char **matrix, int y, int x)
 {
 	if (matrix[y][x] == 'E')
 		return (0);
-	if (matrix[y][x] != '0' && matrix[y][x] != 'C')
+	if (matrix[y][x] == '1' || matrix[y][x] == 'V')
 		return (1);
 	matrix[y][x] = 'V';
 	if (path_find(matrix, y - 1, x) == 0 ||
 		path_find(matrix, y, x - 1) == 0 ||
-		path_find(matrix, y, x + 1) == 0 ||
-		path_find(matrix, y + 1, x) == 0)
-		return 0;
-	matrix[y][x] = '0';
+		path_find(matrix, y + 1, x) == 0 ||
+		path_find(matrix, y, x + 1) == 0 )
+		return (0);
     return (1);
 }
 
 int	player_pos(char **matrix, int *y, int *x)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	while (matrix[i])
