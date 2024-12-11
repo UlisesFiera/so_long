@@ -12,31 +12,20 @@
 
 #include "longlib.h"
 
-int is_valid(char **matrix, int y, int x, int rows, int cols)
+int path_find(char **matrix, int y, int x) 
 {
-    return (y >= 0 && y < rows && x >= 0 && x < cols && 
-            (matrix[y][x] == '0' || matrix[y][x] == 'C' || matrix[y][x] == 'P'));
-}
-
-int path_find(char **matrix, int y, int x, int rows, int cols) 
-{
-    if (matrix[y][x] == 'E') // Exit found
-        return 0;
-
-    if (!is_valid(matrix, y, x, rows, cols))
-        return 1; // Not traversable
-
-    matrix[y][x] = 'V'; // Mark as visited
-
-    // Explore all possible directions
-    if (path_find(matrix, y - 1, x, rows, cols) == 0 || // Up
-        path_find(matrix, y, x - 1, rows, cols) == 0 || // Left
-        path_find(matrix, y, x + 1, rows, cols) == 0 || // Right
-        path_find(matrix, y + 1, x, rows, cols) == 0)   // Down
-        return 0;
-
-    matrix[y][x] = '0'; // Reset for backtracking
-    return 1; // No valid path
+	if (matrix[y][x] == 'E')
+		return (0);
+	if (matrix[y][x] != '0' && matrix[y][x] != 'C')
+		return (1);
+	matrix[y][x] = 'V';
+	if (path_find(matrix, y - 1, x) == 0 ||
+		path_find(matrix, y, x - 1) == 0 ||
+		path_find(matrix, y, x + 1) == 0 ||
+		path_find(matrix, y + 1, x) == 0)
+		return 0;
+	matrix[y][x] = '0';
+    return (1);
 }
 
 int	player_pos(char **matrix, int *y, int *x)
