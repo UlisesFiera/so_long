@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:54:34 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/12 11:49:40 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:05:34 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +28,15 @@ int	line_size(char *line)
 	return (size);
 }
 
-int	top_bot(char *top_bot_line)
+int	line_check(char *line)
 {
-	int		i;
+	int i;
 
 	i = 0;
-	while (top_bot_line[i] != '\0' && top_bot_line[i] != '\n')
+	while (line[i] != '\0' && line[i] != '\n')
 	{
-		if (top_bot_line[i] != '1')
+		if (line[i] != '1')
 		{
-			ft_printf("Top or bottom line not closed by walls\n");
-			free(top_bot_line);
 			return (1);
 		}
 		i++;
@@ -45,16 +44,68 @@ int	top_bot(char *top_bot_line)
 	return (0);
 }
 
-int	sides(char *line, char *top_bot_line, int fd)
+int	top_check(t_data_load *load)
 {
+	int		fd;
+	char	*line;
+
+	fd = open(load->map, O_RDONLY);
+	line = get_next_line(fd);
+	if (line_check(line))
+	{
+		ft_printf("Top line not closed by walls\n");
+		free(line);
+		close(fd);
+		return (1);
+	}
+	free(line);
+	close(fd);
+	return (0);
+}
+
+int	bot_check(t_data_load *load)
+{
+	int		fd;
+	char	*line;
+	int		i;
+
+	fd = open(load->map, O_RDONLY);
+	line = get_next_line(fd);
+	i = 1;
+	while (i < load->map_height)
+	{
+		free(line);
+		line = get_next_line(fd);
+		i++;
+	}
+	if (line_check(line))
+	{
+		ft_printf("Bot line not closed by walls\n");
+		free(line);
+		close(fd);
+		return (1);
+	}
+	free(line);
+	close(fd);
+	return (0);
+}
+
+int	sides(t_data_load *load)
+{
+	int		fd;
+	char	*line;
 	int		i;
 
 	i = 0;
-	while (line != NULL)
+	fd = open(load->map, O_RDONLY);
+	line = get_next_line(fd);
+	while (line)
 	{
 		if (line[0] != '1')
 		{
 			ft_printf("Left side not closed by walls\n");
+			free(line);
+			close(fd);
 			return (1);
 		}
 		while (line[i + 1] != '\0' && line[i + 1] != '\n')
@@ -62,14 +113,13 @@ int	sides(char *line, char *top_bot_line, int fd)
 		if (line[i] != '1')
 		{
 			ft_printf("Right side not closed by walls\n");
+			free(line);
+			close(fd);
 			return (1);
 		}
-		top_bot_line = line;
+		free(line);
 		line = get_next_line(fd);
 	}
-	if (top_bot(top_bot_line))
-		return (1);
-	free(line);
 	return (0);
 }
 
@@ -89,6 +139,7 @@ int	row_check(t_data_load *load)
 		if (size != size_rest)
 		{
 			ft_printf("Error: all map rows must be the same size\n");
+			free(line);
 			return (1);
 		}
 		free(line);
@@ -101,28 +152,13 @@ int	row_check(t_data_load *load)
 
 int	wall_check(t_data_load *load)
 {
-	int		fd;
-	char	*line;
-	char	*top_bot_line;
-
 	if (row_check(load))
 		return (1);
-	fd = open(load->map, O_RDONLY);
-	top_bot_line = get_next_line(fd);
-	if (top_bot(top_bot_line))
-	{
-		close(fd);
+	if (top_check(load))
 		return (1);
-	}
-	line = get_next_line(fd);
-	if (sides(line, top_bot_line, fd))
-	{
-		close(fd);
-		free(line);
-		free(top_bot_line);
+	if (bot_check(load))
 		return (1);
-	}
-	free(top_bot_line);
-	close(fd);
+	if (sides(load))
+		return (1);
 	return (0);
 }

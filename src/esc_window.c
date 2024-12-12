@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   esc_window.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:39:33 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/11/28 16:39:33 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:22:04 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,15 @@
 
 int		close_window(t_data_load *load)
 {
-		//mlx_destroy_image(load->mlx, load->img);
-		mlx_destroy_window(load->mlx, load->win);
-		mlx_destroy_display(load->mlx);
-		free(load->mlx);
-		exit (0);
+	free_load(load);
+	exit (0);
 }
-
  
 int		esc_key(int keycode, t_data_load *load)
 {
 	if (keycode == 65307)
 	{
-		//mlx_destroy_image(load->mlx, load->img);
-		mlx_destroy_window(load->mlx, load->win);
-		mlx_destroy_display(load->mlx);
-		free(load->mlx);
+		free_load(load);
 		exit (0);
 	}
 	return (0);

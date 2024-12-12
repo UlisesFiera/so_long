@@ -6,90 +6,69 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 13:11:09 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/06 11:36:04 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:19:16 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "longlib.h"
 
-int		player_load(t_data_load *load, t_data_texture *player_texture)
+int		player_load(t_data_load *load)
 {
-	player_texture->img = mlx_xpm_file_to_image(load->mlx, "./assets/player.xpm", 
-										&player_texture->width, &player_texture->height);
-	if (!player_texture->img)
-	{
-		mlx_destroy_window(load->mlx, load->win);
-		free(load->mlx);
+	load->player_texture.img = mlx_xpm_file_to_image(load->mlx, "./assets/player.xpm", 
+										&load->player_texture.width, &load->player_texture.height);
+	if (!load->player_texture.img)
 		return (1);
-	}
-	player_texture->addr = mlx_get_data_addr(player_texture->img, &player_texture->bits_per_pixel, 
-									&player_texture->line_length, &player_texture->endian);
-	texture_put(load, player_texture, 'P');
+	load->player_texture.addr = mlx_get_data_addr(load->player_texture.img, &load->player_texture.bits_per_pixel, 
+									&load->player_texture.line_length, &load->player_texture.endian);
+	texture_put(load, 'P');
 	return (0);
 }
 
-int		collectible_load(t_data_load *load, t_data_texture *collectible_texture)
+int		collectible_load(t_data_load *load)
 {
-	collectible_texture->img = mlx_xpm_file_to_image(load->mlx, "./assets/collectible.xpm", 
-										&collectible_texture->width, &collectible_texture->height);
-	if (!collectible_texture->img)
-	{
-		mlx_destroy_window(load->mlx, load->win);
-		free(load->mlx);
+	load->collectible_texture.img = mlx_xpm_file_to_image(load->mlx, "./assets/collectible.xpm", 
+										&load->collectible_texture.width, &load->collectible_texture.height);
+	if (!load->collectible_texture.img)
 		return (1);
-	}
-	collectible_texture->addr = mlx_get_data_addr(collectible_texture->img, &collectible_texture->bits_per_pixel, 
-									&collectible_texture->line_length, &collectible_texture->endian);
-	texture_put(load, collectible_texture, 'C');
+	load->collectible_texture.addr = mlx_get_data_addr(load->collectible_texture.img, &load->collectible_texture.bits_per_pixel, 
+									&load->collectible_texture.line_length, &load->collectible_texture.endian);
+	texture_put(load, 'C');
 	return (0);
 }
 
-int		wall_load(t_data_load *load, t_data_texture *wall_texture)
+int		wall_load(t_data_load *load)
 {
-	wall_texture->img = mlx_xpm_file_to_image(load->mlx, "./assets/wall.xpm", 
-										&wall_texture->width, &wall_texture->height);
-	if (!wall_texture->img)
-	{
-		mlx_destroy_window(load->mlx, load->win);
-		free(load->mlx);
+	load->wall_texture.img = mlx_xpm_file_to_image(load->mlx, "./assets/wall.xpm", 
+										&load->wall_texture.width, &load->wall_texture.height);
+	if (!load->wall_texture.img)
 		return (1);
-	}
-	wall_texture->addr = mlx_get_data_addr(wall_texture->img, &wall_texture->bits_per_pixel, 
-									&wall_texture->line_length, &wall_texture->endian);
-	texture_put(load, wall_texture, '1');
+	load->wall_texture.addr = mlx_get_data_addr(load->wall_texture.img, &load->wall_texture.bits_per_pixel, 
+									&load->wall_texture.line_length, &load->wall_texture.endian);
+	texture_put(load, '1');
 	return (0);
 }
 
-int		floor_load(t_data_load *load, t_data_texture *floor_texture)
+int		floor_load(t_data_load *load)
 {
-	floor_texture->img = mlx_xpm_file_to_image(load->mlx, "./assets/floor_sprite.xpm", 
-										&floor_texture->width, &floor_texture->height);
-	if (!floor_texture->img)
-	{
-		mlx_destroy_window(load->mlx, load->win);
-		free(load->mlx);
+	load->floor_texture.img = mlx_xpm_file_to_image(load->mlx, "./assets/floor_sprite.xpm", 
+										&load->floor_texture.width, &load->floor_texture.height);
+	if (!load->floor_texture.img)
 		return (1);
-	}
-	floor_texture->addr = mlx_get_data_addr(floor_texture->img, &floor_texture->bits_per_pixel, 
-									&floor_texture->line_length, &floor_texture->endian);
-	texture_put(load, floor_texture, '0');
+	load->floor_texture.addr = mlx_get_data_addr(load->floor_texture.img, &load->floor_texture.bits_per_pixel, 
+									&load->floor_texture.line_length, &load->floor_texture.endian);
+	texture_put(load, '0');
 	return (0);
 }
 
 int		load_textures(t_data_load *load)
 {
-	t_data_texture		floor_texture;
-	t_data_texture		wall_texture;
-	t_data_texture		collectible_texture;
-	t_data_texture		player_texture;
-
-	ft_memset(&floor_texture, 0, sizeof(t_data_texture));
-	floor_load(load, &floor_texture);
-	ft_memset(&wall_texture, 0, sizeof(t_data_texture));
-	wall_load(load, &wall_texture);
-	ft_memset(&collectible_texture, 0, sizeof(t_data_texture));
-	collectible_load(load, &collectible_texture);
-	ft_memset(&player_texture, 0, sizeof(t_data_texture));
-	player_load(load, &player_texture);
+	if (floor_load(load) || wall_load(load) || collectible_load(load) || player_load(load))
+	{
+		free_load(load);
+		return (1);
+	}
 	return (0);
 }
+
+
+	

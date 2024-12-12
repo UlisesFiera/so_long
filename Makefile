@@ -14,7 +14,9 @@ SRCS					= src/main.c \
 						  src/load_textures.c \
 						  src/texture_put.c \
 						  src/route.c \
-						  src/backtracking.c 
+						  src/backtracking.c \
+						  src/free_load.c \
+						  src/movement.c \
 
 OBJS					= ${SRCS:.c=.o}
 

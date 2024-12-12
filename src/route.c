@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 10:43:52 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/07 16:40:17 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:53:29 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	copy_map(char **matrix, t_data_load *load)
 		matrix[i] = ft_strdup(line);
 		if (!matrix[i])
 		{	
-			free_matrix(matrix, i + 1);
+			free_matrix(matrix, i);
 			free(line);
 			close(fd);
 			return (1);
@@ -79,11 +79,17 @@ int		route(t_data_load *load)
 	}
 	if (copy_map(matrix, load))
 	{
-		ft_printf("Copy failure failure\n");
+		free(matrix);
+		ft_printf("Copy map failure\n");
 		return (1);
 	}
 	if (backtracking(matrix))
+	{
+		free_matrix(matrix, row);
+		ft_printf("Backtracking failure\n");
 		return (1);
+	}
+	free_matrix(matrix, row);
 	return (0);
 }
 

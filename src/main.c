@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:34:24 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/12 11:47:52 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:25:06 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	*initialize(t_data_load *load)
 	load->pixel_y = 99;
 	if (!load->mlx)
 	{
+		free_load(load);
 		ft_printf("Error: mlx failure\n");
 		return (NULL);
 	}
@@ -50,6 +51,7 @@ void	*initialize(t_data_load *load)
 								(load->map_height * load->pixel_y), "./so long");
 	if (!load->win)
 	{
+		free_load(load);
 		ft_printf("Error: couldn't create window\n");
 		return (NULL);
 	}
@@ -68,12 +70,13 @@ int		mapping(char *map, t_data_load *load)
 		return (1);
 	}
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line != NULL && line[0] != '\n')
 	{
 		load->map_height++;
 		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	close (fd);
 	if (map_check(load))
 	{
@@ -101,11 +104,15 @@ int		main(int argc, char **argv)
 		ft_printf("Error: couldn't initialize game\n");
 		return (1);
 	}
-	load_textures(&load);
+	if (load_textures(&load))
+	{
+		ft_printf("Error: texture load failure\n");
+		return (1);
+	}
+	movement(&load);
 	esc_window(&load);
 	mlx_loop(load.mlx);
-	mlx_destroy_display(load.mlx);
-	free(load.mlx);
+	free_load(&load);
 	return (0);
 }
 
