@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:18:52 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/06 13:09:47 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:19:01 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	texture_put(t_data_load *load, t_data_texture *texture, char option)
 		floor_put(load, texture);
 	if (option == '1')
 		sprite_put(load, texture, option);
-	if (option == 'C')
-		sprite_put(load, texture, option);
 	if (option == 'P')
+		sprite_put(load, texture, option);
+	if (option == 'C')
 		sprite_put(load, texture, option);
 }
