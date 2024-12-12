@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:18:52 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/12 12:19:01 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:07:42 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	sprite_put(t_data_load *load, t_data_texture *sprite_texture, char option)
 			if ((char) line[j] == option)
 			{
 				mlx_put_image_to_window(load->mlx, load->win, sprite_texture->img, 
-										(sprite_texture->width * j), (sprite_texture->width * i));
+										(sprite_texture->width * j), (sprite_texture->height * i));
 			}
 			j++;
 		}
