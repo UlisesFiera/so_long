@@ -1,19 +1,20 @@
 NAME 					= so_long
 
-LIBFT					= ./libft/libft.a
+LIBFT					= ./src/libft/libft.a
 
 CC						= gcc
 
 STD_FLAGS				= -Wall -Wextra -Werror -fPIE
-MLX_FLAGS				= -Lminilibx-linux -lmlx_Linux -lX11 -lXext
+MLX_FLAGS				= -Lsrc/minilibx-linux -lmlx_Linux -lX11 -lXext
 
-SRCS					= main.c \
-						  esc_window.c \
-						  map_check.c \
-						  load_textures.c \
-						  texture_put.c \
-						  route.c \
-						  backtracking.c
+SRCS					= src/main.c \
+						  src/esc_window.c \
+						  src/wall_check.c \
+						  src/char_check.c \
+						  src/load_textures.c \
+						  src/texture_put.c \
+						  src/route.c \
+						  src/backtracking.c 
 
 OBJS					= ${SRCS:.c=.o}
 
@@ -25,14 +26,14 @@ ${NAME}:
 						${CC} ${SRCS} ${LIBFT} ${STD_FLAGS} ${MLX_FLAGS} -o ${NAME}
 
 ${LIBFT}:				
-						make bonus -C ./libft
+						make bonus -C ./src/libft
 
 clean:
 						${REMOVE}
 
 fclean:					clean
-						make fclean -C ./libft
+						make fclean -C ./src/libft
 						
-re:						fclean all
+re:						clean all
 
 .PHONY:					all clean fclean re

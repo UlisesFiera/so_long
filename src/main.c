@@ -6,11 +6,35 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:34:24 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/07 11:25:54 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:47:52 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "longlib.h"
+
+int	map_check(t_data_load *load)
+{
+	if (char_check(load))
+		return (1);
+	if (wall_check(load))
+		return (1);
+	if (load->map_height < 3)
+	{
+		ft_printf("Min height: 3 rows\n");
+		return (1);
+	}
+	if (load->map_height > load->map_width)
+	{
+		ft_printf("Not a rectangular map\n");
+		return (1);
+	}
+	if (route(load))
+	{
+		printf("Error: no possible route\n");
+		return (1);
+	}
+	return (0);
+}
 
 void	*initialize(t_data_load *load)
 {
@@ -40,14 +64,13 @@ int		mapping(char *map, t_data_load *load)
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("Error: couldn't read map file\n");
+		ft_printf("Error: couldn't read map, or file not provided\n");
 		return (1);
 	}
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		load->map_height++;
-		load->map_width = ft_strlen(line);
 		free(line);
 		line = get_next_line(fd);
 	}

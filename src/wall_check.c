@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_check.c                                        :+:      :+:    :+:   */
+/*   wall_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 15:52:34 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/07 15:00:22 by ulfernan         ###   ########.fr       */
+/*   Created: 2024/12/12 10:54:34 by ulfernan          #+#    #+#             */
+/*   Updated: 2024/12/12 11:49:40 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "longlib.h"
+
+int	line_size(char *line)
+{
+	int	size;
+	int	i;
+
+	size = 0;
+	i = 0;
+	while (ft_isalnum(line[i]))
+	{
+		size++;
+		i++;
+	}
+	return (size);
+}
 
 int	top_bot(char *top_bot_line)
 {
@@ -49,7 +64,6 @@ int	sides(char *line, char *top_bot_line, int fd)
 			ft_printf("Right side not closed by walls\n");
 			return (1);
 		}
-		free(top_bot_line);
 		top_bot_line = line;
 		line = get_next_line(fd);
 	}
@@ -59,12 +73,40 @@ int	sides(char *line, char *top_bot_line, int fd)
 	return (0);
 }
 
+int	row_check(t_data_load *load)
+{
+	int		fd;
+	int		size;
+	int		size_rest;
+	char	*line;
+
+	fd = open(load->map, O_RDONLY);
+	line = get_next_line(fd);
+	size = line_size(line);
+	while (line)
+	{
+		size_rest = line_size(line);
+		if (size != size_rest)
+		{
+			ft_printf("Error: all map rows must be the same size\n");
+			return (1);
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	load->map_width = size;
+	return (0);
+}
+
 int	wall_check(t_data_load *load)
 {
 	int		fd;
 	char	*line;
 	char	*top_bot_line;
 
+	if (row_check(load))
+		return (1);
 	fd = open(load->map, O_RDONLY);
 	top_bot_line = get_next_line(fd);
 	if (top_bot(top_bot_line))
@@ -82,59 +124,5 @@ int	wall_check(t_data_load *load)
 	}
 	free(top_bot_line);
 	close(fd);
-	return (0);
-}
-
-int	char_check(t_data_load *load)
-{
-	int		fd;
-	char	*line;
-	int		i;
-
-	fd = open(load->map, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		i = 0;
-		while (line[++i])
-		{
-			if ((line[i] != '1') && (line[i] != '0') && (line[i] != 'P') && 
-				(line[i] != 'C') && (line[i] != 'E') && (line[i] != '\n'))
-			{
-				ft_printf("Invalid item in map: '%c'\n", line[i]);
-				free(line);
-				close(fd);
-				return (1);
-			}
-		}
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (0);
-}
-
-int	map_check(t_data_load *load)
-{
-	if (load->map_height < 3)
-	{
-		ft_printf("Min height: 3 rows\n");
-		return (1);
-	}
-	if (load->map_height > load->map_width)
-	{
-		ft_printf("Not a rectangular map\n");
-		return (1);
-	}
-	if (char_check(load))
-		return (1);
-	if (wall_check(load))
-		return (1);
-
-	if (route(load))
-	{
-		printf("Error: no possible route\n");
-		return (1);
-	}
 	return (0);
 }
