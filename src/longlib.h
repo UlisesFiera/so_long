@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:47:32 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/15 21:02:55 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/15 21:57:23 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ void	free_matrix(t_data_load *load);
 int		collision(t_data_load *load, int x, int y);
 int		background(t_data_load *load);
 void	move(int keycode, t_data_load *load);
+int	close_window(t_data_load *load);
 
 #endif

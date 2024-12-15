@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 20:28:29 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/15 20:53:42 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/15 21:40:40 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	redraw(t_data_load *load, int new_x, int new_y)
 	load->player_texture.y = new_y;
 	mlx_put_image_to_window(load->mlx, load->win, load->player_texture.img,
 		new_x, new_y);
+	load->player_texture.x = new_x;
+	load->player_texture.y = new_y;
 	ft_printf("Player steps: %d\n", count++);
 }
 

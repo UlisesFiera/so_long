@@ -20,6 +20,7 @@ SRCS					= src/main.c \
 						  src/collision.c \
 						  src/background.c \
 						  src/move.c \
+						  src/close_window.c \
 
 OBJS					= ${SRCS:.c=.o}
 
