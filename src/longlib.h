@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:47:32 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/12 19:40:42 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/15 21:02:55 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_data_load
 	void				*mlx;
 	void				*win;
 	char				*map;
+	char				**map_matrix;
 	void				*img;
 	int					pixel_x;
 	int					pixel_y;
@@ -50,6 +51,7 @@ typedef struct	s_data_load
 	t_data_texture		wall_texture;
 	t_data_texture		collectible_texture;
 	t_data_texture		player_texture;
+	t_data_texture		exit_texture;
 }						t_data_load;
 
 void	esc_window(t_data_load *load);
@@ -57,9 +59,13 @@ int		load_textures(t_data_load *load);
 void	texture_put(t_data_load *load, char option);
 int		wall_check(t_data_load *load);
 int		char_check(t_data_load *load);
-int		route(t_data_load *load);
-int		backtracking(char **matrix);
+int		backtracking(t_data_load *load);
 void	free_load(t_data_load *load);
-void	movement(t_data_load *load);
+void	triggers(t_data_load *load);
+int		map_copy(t_data_load *load);
+void	free_matrix(t_data_load *load);
+int		collision(t_data_load *load, int x, int y);
+int		background(t_data_load *load);
+void	move(int keycode, t_data_load *load);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:18:52 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/12 19:44:42 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/15 21:15:41 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,28 @@
 
 void	sprite_put(t_data_load *load, t_data_texture *sprite_texture, char option)
 {
-	int		fd;
-	char	*line;
 	int		i;
 	int		j;
 
-	fd = open(load->map, O_RDONLY);
-	line = get_next_line(fd);
+	map_copy(load);
 	i = 0;
-	while (line != NULL)
+	while (load->map_matrix[i])
 	{
 		j = 0;
-		while (line[j])
+		while (load->map_matrix[i][j])
 		{
-			sprite_texture->y = sprite_texture->height * i;
-			if ((char) line[j] == option)
+			if ((char) load->map_matrix[i][j] == option)
 			{
 				sprite_texture->x = sprite_texture->width * j;
+				sprite_texture->y = sprite_texture->height * i;
 				mlx_put_image_to_window(load->mlx, load->win, sprite_texture->img, 
-										(sprite_texture->width * j), (sprite_texture->height * i));
+										sprite_texture->x, sprite_texture->y);
 			}
 			j++;
 		}
 		i++;
-		free(line);
-		line = get_next_line(fd);
 	}
-	close(fd);
+	free_matrix(load);
 }
 
 void	texture_put(t_data_load *load, char option)
@@ -53,4 +48,6 @@ void	texture_put(t_data_load *load, char option)
 		sprite_put(load, &load->player_texture, option);
 	if (option == 'C')
 		sprite_put(load, &load->collectible_texture, option);
+	if (option == 'E')
+		sprite_put(load, &load->exit_texture, option);
 }

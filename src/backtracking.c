@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:40:39 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/07 16:40:19 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/15 16:53:11 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,33 @@ int	player_pos(char **matrix, int *y, int *x)
 		}
 		i++;
 	}
-	ft_printf("Missing player 'P' item\n");
 	return (1);
 }
 
-int	backtracking(char **matrix)
+int	backtracking(t_data_load *load)
 {
 	int y;
 	int x;
 
 	y = 0;
 	x = 0;
-	if (player_pos(matrix, &y, &x))
+	if (map_copy(load))
+	{
+		ft_printf("Map copy failure\n");
 		return (1);
-	if (path_find(matrix, y, x))
+	}
+	if (player_pos(load->map_matrix, &y, &x))
+	{
+		ft_printf("Missing player 'P' item\n");
+		free_matrix(load);
 		return (1);
+	}
+	if (path_find(load->map_matrix, y, x))
+	{
+		ft_printf("Error: no possible route\n");
+		free_matrix(load);
+		return (1);
+	}
+	free_matrix(load);
 	return (0);
 }

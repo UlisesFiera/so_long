@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:34:24 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/12 19:25:06 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/15 20:27:00 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ int	map_check(t_data_load *load)
 		return (1);
 	if (load->map_height < 3)
 	{
-		ft_printf("Min height: 3 rows\n");
+		ft_printf("Error: Min height: 3 rows\n");
 		return (1);
 	}
 	if (load->map_height > load->map_width)
 	{
-		ft_printf("Not a rectangular map\n");
+		ft_printf("Error: not a rectangular map\n");
 		return (1);
 	}
-	if (route(load))
+	if (backtracking(load))
 	{
-		printf("Error: no possible route\n");
+		printf("Error: invalid map\n");
 		return (1);
 	}
 	return (0);
@@ -66,7 +66,7 @@ int		mapping(char *map, t_data_load *load)
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("Error: couldn't read map, or file not provided\n");
+		ft_printf("Error: couldn't read map // map not provided\n");
 		return (1);
 	}
 	line = get_next_line(fd);
@@ -79,10 +79,7 @@ int		mapping(char *map, t_data_load *load)
 	free(line);
 	close (fd);
 	if (map_check(load))
-	{
-		ft_printf("Error: invalid map\n");
 		return (1);
-	}
 	return (0);
 }
 
@@ -109,14 +106,8 @@ int		main(int argc, char **argv)
 		ft_printf("Error: texture load failure\n");
 		return (1);
 	}
-	movement(&load);
-	esc_window(&load);
+	triggers(&load);
 	mlx_loop(load.mlx);
 	free_load(&load);
 	return (0);
 }
-
-
-
-// ft_pixel_put(&load, 300, 200, 0x00FF0000);
-// ft_printf("Hi!\n");

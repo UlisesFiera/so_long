@@ -8,15 +8,18 @@ STD_FLAGS				= -Wall -Wextra -Werror -fPIE
 MLX_FLAGS				= -Lsrc/minilibx-linux -lmlx_Linux -lX11 -lXext
 
 SRCS					= src/main.c \
-						  src/esc_window.c \
 						  src/wall_check.c \
 						  src/char_check.c \
 						  src/load_textures.c \
 						  src/texture_put.c \
-						  src/route.c \
 						  src/backtracking.c \
 						  src/free_load.c \
-						  src/movement.c \
+						  src/triggers.c \
+						  src/map_copy.c \
+						  src/free_matrix.c \
+						  src/collision.c \
+						  src/background.c \
+						  src/move.c \
 
 OBJS					= ${SRCS:.c=.o}
 
