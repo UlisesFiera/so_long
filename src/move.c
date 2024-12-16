@@ -18,8 +18,6 @@ void	redraw(t_data_load *load, int new_x, int new_y)
 
 	mlx_put_image_to_window(load->mlx, load->win, load->floor_texture.img,
 		load->player_texture.x, load->player_texture.y);
-	load->player_texture.x = new_x;
-	load->player_texture.y = new_y;
 	mlx_put_image_to_window(load->mlx, load->win, load->player_texture.img,
 		new_x, new_y);
 	load->player_texture.x = new_x;

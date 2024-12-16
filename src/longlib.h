@@ -47,6 +47,7 @@ typedef struct	s_data_load
 	int					pixel_y;
 	int					map_width;
 	int					map_height;
+	int					collectible_count;
 	t_data_texture		floor_texture;
 	t_data_texture		wall_texture;
 	t_data_texture		collectible_texture;

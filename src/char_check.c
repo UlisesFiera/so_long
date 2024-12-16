@@ -12,12 +12,38 @@
 
 #include "longlib.h"
 
+void		collection(t_data_load *load)
+{
+	int	i;
+	int	j;
+	int	count;
+	
+	map_copy(load);
+	count = 0;
+	i = 0;
+	while (load->map_matrix[i])
+	{
+		j = 0;
+		while (load->map_matrix[i][j])
+		{
+			if ((char)load->map_matrix[i][j] == 'C')
+				count++;
+			j++;
+		}
+		i++;
+	}
+	load->collectible_count = 0;
+	load->collectible_count = count;
+	free_matrix(load);
+}
+
 int	char_check(t_data_load *load)
 {
 	int		fd;
 	char	*line;
 	int		i;
 
+	collection(load);
 	fd = open(load->map, O_RDONLY);
 	line = get_next_line(fd);
 	while (line)

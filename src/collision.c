@@ -12,57 +12,39 @@
 
 #include "longlib.h"
 
-int		collection(t_data_load *load)
-{
-	int	i;
-	int	j;
-	int	count;
-	
-	while (load->map_matrix[i])
-	{
-		while (load->map_matrix[i][j])
-		{
-			if ((char)load->map_matrix[i][j] == 'C')
-				count++;
-			j++;
-		}
-		i++;
-	}
-	return (count);
-}
-
 int		collision(t_data_load *load, int x, int y)
 {
-	int	map_x;
-    int	map_y;
-	int	count;
-	int	collected;
-	int	open_exit;
+	int			map_x;
+    int			map_y;
+	static int	visited_y = 0;
+	static int	visited_x = 0;
+	static int	collected = 0;
+	static int	open_exit = 0;
     
 	map_x = x / load->pixel_x;
 	map_y = y / load->pixel_y;
-	open_exit = 0;
 	map_copy(load);
-	collected = 0;
-	count = collection(load);
 	if (load->map_matrix[map_y][map_x] == '1')
 	{
 		free_matrix(load);
 		return (1);
 	}
-	if (load->map_matrix[map_y][map_x] == 'C')
+	if (load->map_matrix[map_y][map_x] == 'C' && map_y != visited_y && map_x != visited_x)
 	{
 		collected++;
-		if (collected == count)
-		open_exit = 1;
+		visited_y = map_y;
+		visited_x = map_x;
+		ft_printf("count: %i\n", collected);
+		if (collected == load->collectible_count)
+			open_exit = 1;
 	}
 	if (load->map_matrix[map_y][map_x] == 'E')
 	{
 		if (open_exit == 1)
 		{
 			free_matrix(load);
-			mlx_hook(load->win, 17, 0, close_window, load);
-			return (0);
+			free_load(load);
+			exit(0);
 		}
 		free_matrix(load);
 		return (1);
