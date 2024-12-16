@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:54:05 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/16 23:51:53 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/17 00:03:05 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,32 @@ int	char_check(t_data_load *load)
 		line = get_next_line(fd);
 	}
 	close(fd);
+	return (0);
+}
+
+int	char_check(t_data_load *load)
+{
+	int		i;
+	int		j;
+
+	collection(load);
+	map_copy(load);
+	i = 0;
+	while (load->map_matrix[i])
+	{
+		j = 0;
+		while (load->map_matrix[i][j])
+		{
+			if ((load->map_matrix[i][j] != '1') && (load->map_matrix[i][j] != '0') && (load->map_matrix[i][j] != 'P')
+				&& (load->map_matrix[i][j] != 'C') && (load->map_matrix[i][j] != 'E') && (load->map_matrix[i][j] != '\n'))
+			{
+				ft_printf("Invalid item in map: '%c'\n", load->map_matrix[i][j]);
+				return (1);
+			}
+			j++;
+		}
+		i++;
+	}
+	free_matrix(load);
 	return (0);
 }
