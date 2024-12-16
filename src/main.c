@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:34:24 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/15 20:27:00 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/16 23:40:10 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	*initialize(t_data_load *load)
 		ft_printf("Error: mlx failure\n");
 		return (NULL);
 	}
-	load->win = mlx_new_window(load->mlx, (load->map_width * load->pixel_x), 
-								(load->map_height * load->pixel_y), "./so long");
+	load->win = mlx_new_window(load->mlx, (load->map_width * load->pixel_x),
+			(load->map_height * load->pixel_y), "./so long");
 	if (!load->win)
 	{
 		free_load(load);
@@ -58,7 +58,7 @@ void	*initialize(t_data_load *load)
 	return (load->win);
 }
 
-int		mapping(char *map, t_data_load *load)
+int	mapping(char *map, t_data_load *load)
 {
 	int		fd;
 	char	*line;
@@ -83,7 +83,7 @@ int		mapping(char *map, t_data_load *load)
 	return (0);
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data_load	load;
 
