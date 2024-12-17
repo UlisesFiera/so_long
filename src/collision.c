@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 14:20:56 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/17 15:10:49 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:17:08 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 int	exit_check(t_data_load *load, int map_y, int map_x, int open_exit)
 {
-	if (load->map_matrix[map_y][map_x] == 'E')
+	if (open_exit == 1)
 	{
-		if (open_exit == 1)
-		{
-			free_matrix(load);
-			free_load(load);
-			exit(0);
-		}
-		return (1);
+		free_matrix(load);
+		free_load(load);
+		exit(0);
 	}
 	return (1);
 }
@@ -61,10 +57,14 @@ int		collision(t_data_load *load, int x, int y)
 	}
 	if (collection_count(load, map_y, map_x))
 		open_exit = 1;
-	if (exit_check(load, map_y, map_x, open_exit))
+	if (load->map_matrix[map_y][map_x] == 'E')
 	{
-		free_matrix(load);
-		return (1);
+		if (exit_check(load, map_y, map_x, open_exit))
+		{
+			free_matrix(load);
+			return (1);
+		}
 	}
+	free_matrix(load);
 	return (0);
 }
