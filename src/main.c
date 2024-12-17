@@ -47,6 +47,7 @@ void	*initialize(t_data_load *load)
 	}
 	load->pixel_x = 96;
 	load->pixel_y = 99;
+	ft_printf("mlx: %p, win: %p, map_width: %d, map_height: %d\n", load->mlx, load->win, load->map_width, load->map_height);
 	load->win = mlx_new_window(load->mlx, (load->map_width * load->pixel_x),
 			(load->map_height * load->pixel_y), "./so long");
 	if (!load->win)
@@ -63,8 +64,6 @@ int	mapping(char *map, t_data_load *load)
 	int		fd;
 	char	*line;
 
-	load->map_width = 0;
-	load->map_height = 0;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 	{
