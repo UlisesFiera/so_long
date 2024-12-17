@@ -1,0 +1,35 @@
+17/12
+
+==4815== 
+==4815== HEAP SUMMARY:
+==4815==     in use at exit: 0 bytes in 0 blocks
+==4815==   total heap usage: 8,074 allocs, 8,074 frees, 290,239 bytes allocated
+==4815== 
+==4815== All heap blocks were freed -- no leaks are possible
+==4815== 
+==4815== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==4815== 
+==4815== 1 errors in context 1 of 1:
+==4815== Syscall param writev(vector[0]) points to uninitialised byte(s)
+==4815==    at 0x4AE5864: writev (writev.c:26)
+==4815==    by 0x4BDCACA: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==4815==    by 0x4BDCC4E: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==4815==    by 0x4BDDD7E: xcb_writev (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==4815==    by 0x48AC0B8: _XSend (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==4815==    by 0x48B1148: _XReadEvents (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==4815==    by 0x48B152B: XWindowEvent (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==4815==    by 0x111B65: mlx_int_wait_first_expose (in /home/ulises/Documentos/42/so_long_wip/so_long)
+==4815==    by 0x1118A5: mlx_new_window (in /home/ulises/Documentos/42/so_long_wip/so_long)
+==4815==    by 0x10E691: initialize (in /home/ulises/Documentos/42/so_long_wip/so_long)
+==4815==    by 0x10E86F: main (in /home/ulises/Documentos/42/so_long_wip/so_long)
+==4815==  Address 0x4c43d1c is 28 bytes inside a block of size 16,384 alloc'd
+==4815==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4815==    by 0x489B42D: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==4815==    by 0x111656: mlx_init (in /home/ulises/Documentos/42/so_long_wip/so_long)
+==4815==    by 0x10E604: initialize (in /home/ulises/Documentos/42/so_long_wip/so_long)
+==4815==    by 0x10E86F: main (in /home/ulises/Documentos/42/so_long_wip/so_long)
+==4815==  Uninitialised value was created by a stack allocation
+==4815==    at 0x111A70: mlx_int_anti_resize_win (in /home/ulises/Documentos/42/so_long_wip/so_long)
+==4815== 
+==4815== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+ubuntu-uli pwd
