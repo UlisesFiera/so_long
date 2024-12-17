@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 14:20:56 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/17 14:50:37 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/17 14:56:37 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	exit_check(t_data_load *load, int map_y, int map_x, int open_exit)
 			free_load(load);
 			exit(0);
 		}
-		return (1);
 	}
+	return (1);
 }
 
 int	collection(t_data_load *load, int map_y, int map_x)
