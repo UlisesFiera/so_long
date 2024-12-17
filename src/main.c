@@ -88,6 +88,15 @@ int	main(int argc, char **argv)
 	t_data_load	load;
 
 	ft_memset(&load, 0, sizeof(t_data_load));
+	
+	ft_printf("load.mlx: %p\n", load.mlx);
+	ft_printf("load.win: %p\n", load.win);
+	ft_printf("load.map: %s\n", load.map);
+	ft_printf("load.map_width: %d\n", load.map_width);
+	ft_printf("load.map_height: %d\n", load.map_height);
+	ft_printf("load.pixel_x: %d\n", load.pixel_x);
+	ft_printf("load.pixel_y: %d\n", load.pixel_y);
+
 	if (argc > 2)
 	{
 		ft_printf("Error: one '.ber' file only\n");
