@@ -6,13 +6,13 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 14:20:56 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/17 15:17:08 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:17:46 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "longlib.h"
 
-int	exit_check(t_data_load *load, int map_y, int map_x, int open_exit)
+int	exit_check(t_data_load *load, int open_exit)
 {
 	if (open_exit == 1)
 	{
