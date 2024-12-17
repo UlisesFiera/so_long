@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 14:20:56 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/17 14:59:09 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:00:59 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ int		collision(t_data_load *load, int x, int y)
 	if (collection_count(load, map_y, map_x))
 		open_exit = 1;
 	if (exit_check(load, map_y, map_x, open_exit))
+	{
 		free_matrix(load);
+		return (1);
+	}
 	return (0);
 }
