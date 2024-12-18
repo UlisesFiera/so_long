@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 14:20:56 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/17 15:18:10 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:44:08 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	collection_count(t_data_load *load, int map_y, int map_x)
 	static int	visited_x = 0;
 	static int	collected = 0;
 
-	if (load->map_matrix[map_y][map_x] == 'C' && map_y != visited_y && map_x != visited_x)
+	if (load->map_matrix[map_y][map_x] == 'C' && map_y
+		!= visited_y && map_x != visited_x)
 	{
 		collected++;
 		visited_y = map_y;
@@ -41,12 +42,12 @@ int	collection_count(t_data_load *load, int map_y, int map_x)
 	return (0);
 }
 
-int		collision(t_data_load *load, int x, int y)
+int	collision(t_data_load *load, int x, int y)
 {
 	int			map_x;
-    int			map_y;
+	int			map_y;
 	static int	open_exit = 0;
-    
+
 	map_x = x / load->pixel_x;
 	map_y = y / load->pixel_y;
 	map_copy(load);

@@ -6,11 +6,18 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:30:47 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/15 21:31:56 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:47:23 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "longlib.h"
+
+void	free_up(t_data_load *load, char *line, int fd)
+{
+	free_matrix(load);
+	free(line);
+	close(fd);
+}
 
 int	copying(t_data_load *load)
 {
@@ -27,10 +34,8 @@ int	copying(t_data_load *load)
 			line[ft_strlen(line) - 1] = '\0';
 		load->map_matrix[i] = ft_strdup(line);
 		if (!load->map_matrix[i])
-		{	
-			free_matrix(load);
-			free(line);
-			close(fd);
+		{
+			free_up(load, line, fd);
 			return (1);
 		}
 		free(line);
@@ -42,7 +47,7 @@ int	copying(t_data_load *load)
 	return (0);
 }
 
-int		map_copy(t_data_load *load)
+int	map_copy(t_data_load *load)
 {
 	load->map_matrix = malloc((load->map_height + 1) * sizeof(char *));
 	if (!load->map_matrix)
@@ -58,6 +63,5 @@ int		map_copy(t_data_load *load)
 	}
 	return (0);
 }
-
 
 // Caller function MUST FREE on success	free_matrix(load);

@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:34:24 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/16 23:40:10 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:42:58 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	*initialize(t_data_load *load)
 	}
 	load->pixel_x = 96;
 	load->pixel_y = 99;
-	ft_printf("mlx: %p, win: %p, map_width: %d, map_height: %d\n", load->mlx, load->win, load->map_width, load->map_height);
 	load->win = mlx_new_window(load->mlx, (load->map_width * load->pixel_x),
 			(load->map_height * load->pixel_y), "./so long");
 	if (!load->win)

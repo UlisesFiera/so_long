@@ -21,6 +21,7 @@ SRCS					= src/main.c \
 						  src/background.c \
 						  src/move.c \
 						  src/close_window.c \
+						  src/sides_top_bot.c \
 
 OBJS					= ${SRCS:.c=.o}
 
