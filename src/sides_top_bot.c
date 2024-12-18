@@ -6,26 +6,11 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:52:08 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/18 17:19:13 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:26:10 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "longlib.h"
-
-int	line_size(char *line)
-{
-	int	size;
-	int	i;
-
-	size = 0;
-	i = 0;
-	while (ft_isalnum(line[i]))
-	{
-		size++;
-		i++;
-	}
-	return (size);
-}
 
 int	line_check(char *line)
 {

@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:54:34 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/18 17:08:21 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:25:36 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,26 @@
 
 int	row_check(t_data_load *load)
 {
-	int		fd;
+	int		i;
 	int		size;
 	int		size_rest;
-	char	*line;
 
-	fd = open(load->map, O_RDONLY);
-	line = get_next_line(fd);
-	size = line_size(line);
-	while (line)
+	map_copy(load);
+	i = 0;
+	size = line_size(load->map_matrix[i]);
+	while (load->map_matrix[i])
 	{
-		size_rest = line_size(line);
+		size_rest = line_size(load->map_matrix[i]);
 		if (size != size_rest)
 		{
 			ft_printf("Error: all map rows must be the same size\n");
-			free(line);
+			free_matrix(load);
 			return (1);
 		}
-		free(line);
-		line = get_next_line(fd);
+		free_matrix(load);
+		i++;
 	}
-	close(fd);
+	free_matrix(load);
 	load->map_width = size;
 	return (0);
 }

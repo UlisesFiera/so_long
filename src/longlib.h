@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:47:32 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/18 17:13:30 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:23:28 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ int		background(t_data_load *load);
 void	move(int keycode, t_data_load *load);
 int		close_window(t_data_load *load);
 int		sides_top_bot(t_data_load *load);
-
+int		line_size(char *line);
 #endif

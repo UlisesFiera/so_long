@@ -22,6 +22,7 @@ SRCS					= src/main.c \
 						  src/move.c \
 						  src/close_window.c \
 						  src/sides_top_bot.c \
+						  src/line_size.c \
 
 OBJS					= ${SRCS:.c=.o}
 
