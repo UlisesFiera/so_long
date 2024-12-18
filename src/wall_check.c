@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:54:34 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/18 17:25:36 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:29:57 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	row_check(t_data_load *load)
 			free_matrix(load);
 			return (1);
 		}
-		free_matrix(load);
 		i++;
 	}
 	free_matrix(load);
