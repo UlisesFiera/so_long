@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:52:08 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/18 17:13:13 by ulfernan         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:19:13 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	line_check(char *line)
 
 int	top_bot_check(t_data_load *load)
 {
-	copy_map(load);
+	map_copy(load);
 	if (line_check(load->map_matrix[0]))
 	{
 		ft_printf("Top line not closed by walls\n");
@@ -74,7 +74,7 @@ int	sides(t_data_load *load)
 		j = 0;
 		if (load->map_matrix[i][0] != '1')
 		{
-			free_matrix(load->map_matrix);
+			free_matrix(load);
 			return (1);
 		}
 		while (load->map_matrix[i][j + 1] != '\0'
@@ -82,12 +82,12 @@ int	sides(t_data_load *load)
 			j++;
 		if (load->map_matrix[i][j] != '1')
 		{
-			free_matrix(load->map_matrix);
+			free_matrix(load);
 			return (2);
 		}
 		i++;
 	}
-	free_matrix(load->map_matrix);
+	free_matrix(load);
 	return (0);
 }
 
