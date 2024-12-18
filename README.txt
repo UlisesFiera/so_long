@@ -1,5 +1,7 @@
 Thanks for installing Ulises' <so_long> project ;)
 
+Currently 1.0
+
 To run the game, just type 'run'; it will use the map_default.ber in the folder, but you can give
 it any other as an argument :o
 
