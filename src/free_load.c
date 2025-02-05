@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:59:46 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/15 21:33:10 by ulfernan         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:54:46 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,4 @@ void	free_load(t_data_load *load)
 	if (load->mlx)
 		mlx_destroy_display(load->mlx);
 	free(load->mlx);
-
 }

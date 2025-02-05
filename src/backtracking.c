@@ -6,25 +6,25 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:40:39 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/15 16:53:11 by ulfernan         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:36:04 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "longlib.h"
 
-int path_find(char **matrix, int y, int x) 
+int	path_find(char **matrix, int y, int x)
 {
 	if (matrix[y][x] == 'E')
 		return (0);
 	if (matrix[y][x] == '1' || matrix[y][x] == 'V')
 		return (1);
 	matrix[y][x] = 'V';
-	if (path_find(matrix, y - 1, x) == 0 ||
-		path_find(matrix, y, x - 1) == 0 ||
-		path_find(matrix, y + 1, x) == 0 ||
-		path_find(matrix, y, x + 1) == 0 )
+	if (path_find(matrix, y - 1, x) == 0
+		|| path_find(matrix, y, x - 1) == 0
+		|| path_find(matrix, y + 1, x) == 0
+		|| path_find(matrix, y, x + 1) == 0)
 		return (0);
-    return (1);
+	return (1);
 }
 
 int	player_pos(char **matrix, int *y, int *x)
@@ -43,7 +43,7 @@ int	player_pos(char **matrix, int *y, int *x)
 				*y = i;
 				*x = j;
 				return (0);
-			}	
+			}
 			j++;
 		}
 		i++;
@@ -53,8 +53,8 @@ int	player_pos(char **matrix, int *y, int *x)
 
 int	backtracking(t_data_load *load)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
 	x = 0;

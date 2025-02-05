@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:47:32 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/15 21:57:23 by ulfernan         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:08:26 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct	s_data_load
 	int					pixel_y;
 	int					map_width;
 	int					map_height;
+	int					collected;
+	int					collection;
 	t_data_texture		floor_texture;
 	t_data_texture		wall_texture;
 	t_data_texture		collectible_texture;
@@ -54,7 +56,6 @@ typedef struct	s_data_load
 	t_data_texture		exit_texture;
 }						t_data_load;
 
-void	esc_window(t_data_load *load);
 int		load_textures(t_data_load *load);
 void	texture_put(t_data_load *load, char option);
 int		wall_check(t_data_load *load);
@@ -67,6 +68,11 @@ void	free_matrix(t_data_load *load);
 int		collision(t_data_load *load, int x, int y);
 int		background(t_data_load *load);
 void	move(int keycode, t_data_load *load);
-int	close_window(t_data_load *load);
+int		close_window(t_data_load *load);
+int		collection(t_data_load *load);
+int		line_size(char *line);
+int		line_check(char *line);
+int		top_check(t_data_load *load);
+int		bot_check(t_data_load *load);
 
 #endif

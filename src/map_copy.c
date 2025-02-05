@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:30:47 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/12/15 21:31:56 by ulfernan         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:03:43 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	copying(t_data_load *load)
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		load->map_matrix[i] = ft_strdup(line);
-		if (!load->map_matrix[i])
-		{	
+		if (!load->map_matrix[i++])
+		{
 			free_matrix(load);
 			free(line);
 			close(fd);
@@ -35,14 +35,13 @@ int	copying(t_data_load *load)
 		}
 		free(line);
 		line = get_next_line(fd);
-		i++;
 	}
 	load->map_matrix[i] = NULL;
 	close(fd);
 	return (0);
 }
 
-int		map_copy(t_data_load *load)
+int	map_copy(t_data_load *load)
 {
 	load->map_matrix = malloc((load->map_height + 1) * sizeof(char *));
 	if (!load->map_matrix)
@@ -58,6 +57,5 @@ int		map_copy(t_data_load *load)
 	}
 	return (0);
 }
-
 
 // Caller function MUST FREE on success	free_matrix(load);
