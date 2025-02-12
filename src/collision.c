@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 14:20:56 by ulfernan          #+#    #+#             */
-/*   Updated: 2025/02/05 13:53:32 by ulfernan         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:56:32 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	exit_game(t_data_load *load, int open_exit)
 	{
 		free_matrix(load);
 		free_load(load);
+		ft_printf("You won! Exiting game\n");
 		exit(0);
 	}
 	else
@@ -48,7 +49,8 @@ int	collision(t_data_load *load, int x, int y)
 			open_exit = 1;
 	}
 	else if (load->map_matrix[map_y][map_x] == 'E')
-		exit_game(load, open_exit);
+		if (exit_game(load, open_exit))
+			return (0);
 	free_matrix(load);
 	return (0);
 }

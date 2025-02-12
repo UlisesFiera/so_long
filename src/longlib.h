@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:47:32 by ulfernan          #+#    #+#             */
-/*   Updated: 2025/02/05 14:08:26 by ulfernan         ###   ########.fr       */
+/*   Updated: 2025/02/12 19:25:22 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "minilibx-linux/mlx.h"
 # include "libft/libft.h"
 
-typedef struct	s_data_texture
+typedef struct s_data_texture
 {
 	void		*img;
 	char		*addr;
@@ -36,7 +36,7 @@ typedef struct	s_data_texture
 	int			endian;
 }				t_data_texture;
 
-typedef struct	s_data_load
+typedef struct s_data_load
 {
 	void				*mlx;
 	void				*win;
@@ -54,6 +54,7 @@ typedef struct	s_data_load
 	t_data_texture		collectible_texture;
 	t_data_texture		player_texture;
 	t_data_texture		exit_texture;
+	t_data_texture		exit_player_texture;
 }						t_data_load;
 
 int		load_textures(t_data_load *load);

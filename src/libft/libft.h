@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 16:40:42 by ulfernan          #+#    #+#             */
-/*   Updated: 2024/11/13 10:23:51 by ulfernan         ###   ########.fr       */
+/*   Updated: 2025/02/12 19:26:12 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-
 
 typedef struct s_list
 {
@@ -99,12 +98,12 @@ char			*get_next_line(int fd);
 
 // ft_printf
 
-int	ft_printf(char const *format, ...);
-int	print_char(int arg);
-int	print_digit(long arg, int base);
-int	print_ptr(void *arg);
-int	print_str(char *arg);
-int	print_un(unsigned long arg, int base);
-int	print_uphex(long arg, int base);
+int				ft_printf(char const *format, ...);
+int				print_char(int arg);
+int				print_digit(long arg, int base);
+int				print_ptr(void *arg);
+int				print_str(char *arg);
+int				print_un(unsigned long arg, int base);
+int				print_uphex(long arg, int base);
 
 #endif

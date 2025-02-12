@@ -6,42 +6,53 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:54:34 by ulfernan          #+#    #+#             */
-/*   Updated: 2025/02/05 14:11:44 by ulfernan         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:31:20 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "longlib.h"
 
-int	sides(t_data_load *load)
+int	side_left(t_data_load *load)
 {
-	int		fd;
-	char	*line;
 	int		i;
 
+	map_copy(load);
 	i = 0;
-	fd = open(load->map, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
+	while (load->map_matrix[i])
 	{
-		if (line[0] != '1')
+		if (load->map_matrix[i][0] != '1')
 		{
 			ft_printf("Left side not closed by walls\n");
-			free(line);
-			close(fd);
+			free_matrix(load);
 			return (1);
 		}
-		while (line[i + 1] != '\0' && line[i + 1] != '\n')
-			i++;
-		if (line[i] != '1')
+		i++;
+	}
+	free_matrix(load);
+	return (0);
+}
+
+int	side_right(t_data_load *load)
+{
+	int		i;
+	int		j;
+
+	map_copy(load);
+	i = 0;
+	while (load->map_matrix[i])
+	{
+		j = 0;
+		while (load->map_matrix[i][j] != '\0')
+			j++;
+		if (load->map_matrix[i][--j] != '1')
 		{
 			ft_printf("Right side not closed by walls\n");
-			free(line);
-			close(fd);
+			free_matrix(load);
 			return (1);
 		}
-		free(line);
-		line = get_next_line(fd);
+		i++;
 	}
+	free_matrix(load);
 	return (0);
 }
 
@@ -74,15 +85,15 @@ int	row_check(t_data_load *load)
 
 int	wall_check(t_data_load *load)
 {
-	map_copy(load);
 	if (row_check(load))
 		return (1);
 	if (top_check(load))
 		return (1);
 	if (bot_check(load))
 		return (1);
-	if (sides(load))
+	if (side_left(load))
 		return (1);
-	free_matrix(load);
+	if (side_right(load))
+		return (1);
 	return (0);
 }
