@@ -6,7 +6,7 @@
 /*   By: ulfernan <ulfernan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:34:24 by ulfernan          #+#    #+#             */
-/*   Updated: 2025/02/05 13:56:35 by ulfernan         ###   ########.fr       */
+/*   Updated: 2025/02/19 08:00:37 by ulfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	map_check(t_data_load *load)
 	}
 	if (backtracking(load))
 	{
-		printf("Error: invalid map\n");
+		ft_printf("Error: invalid map\n");
 		return (1);
 	}
 	return (0);
@@ -57,7 +57,6 @@ void	*initialize(t_data_load *load)
 	}
 	map_copy(load);
 	load->collected = 0;
-	load->collection = collection(load);
 	free_matrix(load);
 	return (load->win);
 }
